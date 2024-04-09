@@ -1,0 +1,197 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 90px 0 40px 0;
+  background-color: $white;
+
+  @include breakpoint('max-lg') {
+    padding: 90px 60px 40px 60px;
+  }
+
+  @include breakpoint('max-md') {
+    padding: 60px 40px 40px 40px;
+  }
+
+  @include breakpoint('max-sm') {
+    padding: 60px 20px 40px 20px;
+  }
+
+  .container {
+    width: 1240px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    @include breakpoint('max-lg') {
+      width: 100%;
+    }
+
+    .footerContent {
+      width: 100%;
+      min-height: 241px;
+      display: flex;
+      justify-content: space-between;
+
+      @include breakpoint('max-sm') {
+        flex-direction: column;
+      }
+
+      .titleContainer {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h1 {
+          width: 179px;
+          @include h2;
+          font-size: 36px;
+          color: $dark;
+          margin: 0;
+        }
+
+        .logoWrapper {
+          width: 150px;
+          height: 60px;
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        @include breakpoint('max-lg') {
+          width: 50%;
+        }
+
+        @include breakpoint('max-md') {
+          .logoWrapper {
+            width: 100px;
+            height: 40px;
+          }
+        }
+
+        @include breakpoint('max-sm') {
+          width: 100%;
+          flex-direction: row-reverse;
+          align-items: center;
+
+          h1 {
+            @include breakpoint('max-sm') {
+              font-size: 18px;
+              width: 50%;
+            }
+          }
+        }
+      }
+
+      .navContainer {
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+
+        .navWrapper {
+          width: 45%;
+          display: flex;
+          justify-content: space-between;
+          color: $dark;
+
+          .menuWrapper,
+          .coursesWrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            & > p {
+              margin: 0px;
+              @include text-18-500;
+              margin-bottom: 10px;
+            }
+
+            & > span {
+              display: block;
+              @include text-16-500;
+            }
+          }
+
+          @include breakpoint('max-lg') {
+            width: 100%;
+
+            .menuWrapper,
+            .coursesWrapper {
+              width: 50%;
+            }
+          }
+        }
+
+        @include breakpoint('max-lg') {
+          width: 50%;
+
+          .navWrapper {
+            width: 100%;
+
+            .menuWrapper,
+            .coursesWrapper {
+              width: 50%;
+            }
+          }
+        }
+
+        @include breakpoint('max-sm') {
+          width: 100%;
+          margin-top: 63px;
+        }
+
+        .tryWrapper {
+          width: 150px;
+
+          @include breakpoint('max-lg') {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .privacyContent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      border: 1px solid $gray;
+      box-sizing: border-box;
+      border-radius: 20px;
+      padding: 15px;
+
+      & > span {
+        @include bodySmall;
+        color: rgba($color: $dark, $alpha: 0.8);
+      }
+
+      .route_group {
+        display: flex;
+
+        & > a {
+          @include bodySmall;
+          font-weight: 700;
+          color: $dark;
+          margin: 0;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        a + a {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

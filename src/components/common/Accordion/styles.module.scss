@@ -1,0 +1,59 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.rootWrapper {
+  border: 1px solid $gray;
+  box-sizing: border-box;
+  border-radius: 6px;
+  box-shadow: none;
+
+  &:last-of-type {
+    border-radius: 6px;
+  }
+
+  &:first-of-type {
+    border-radius: 6px;
+  }
+
+  &.active {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.titleWrapper {
+  padding: 20px;
+  min-height: auto;
+
+  &.titleExpanded {
+    min-height: auto;
+    padding-bottom: 0px;
+  }
+}
+
+.titleContent {
+  margin: 0;
+  &.titleExpanded {
+    margin: 0;
+  }
+}
+
+.titleRoot {
+  margin: 0;
+  @include h5;
+  color: $black;
+
+  &.active {
+    color: $green;
+  }
+}
+
+.contentWrapper {
+  padding: 20px;
+  margin-top: 15px;
+  padding-top: 0px;
+
+  @include breakpoint('max-sm') {
+    padding-right: 0px;
+  }
+}

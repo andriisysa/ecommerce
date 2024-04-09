@@ -1,0 +1,111 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.layout {
+  display: flex;
+  flex-direction: column;
+
+  .main {
+    flex: 1;
+    padding: 0;
+    background: $pinkGray;
+    overflow-x: hidden;
+    min-height: calc(100vh - 80px);
+  }
+}
+
+.CookieConsent {
+  width: 1240px !important;
+  background: $white !important;
+  border-radius: 20px;
+  left: 50% !important;
+  bottom: 40px !important;
+  transform: translateX(-50%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-items: center !important;
+  padding: 16px 20px;
+
+  @include breakpoint('max-lg') {
+    width: calc(100vw - 80px) !important;
+  }
+
+  @include breakpoint('max-md') {
+    width: calc(100vw - 40px) !important;
+  }
+
+  @include breakpoint('max-sm') {
+    // display: none !important;       // should be deleted
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .cookieContentClasses {
+    display: flex;
+    align-items: center;
+    margin: 0 !important;
+
+    p {
+      @include h4;
+      font-weight: normal;
+      color: $dark;
+      margin: 0;
+      padding: 0;
+      margin-left: 10px;
+    }
+
+    @include breakpoint('max-sm') {
+      flex: unset !important;
+      margin-bottom: 20px !important;
+    }
+  }
+
+  .consentBtns {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 10px;
+
+    .acceptBtn {
+      background: $green !important;
+      border-radius: 12px !important;
+      height: 48px !important;
+      padding: 20px 30px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 !important;
+
+      @include bodyBold;
+      color: $white !important;
+    }
+
+    .diclineBtn {
+      background: transparent !important;
+      border: 2px solid $gray !important;
+      border-radius: 12px !important;
+      height: 48px !important;
+      padding: 20px 30px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 !important;
+
+      @include bodyBold;
+      color: $dark !important;
+    }
+
+    @include breakpoint('max-sm') {
+      flex-direction: column-reverse;
+      width: 100% !important;
+
+      .acceptBtn {
+        width: 100% !important;
+      }
+
+      .diclineBtn {
+        width: 100% !important;
+      }
+    }
+  }
+}

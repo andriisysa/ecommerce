@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Sans');
+@import './transition';
+@import '@/styles/variables/_breakpoint.scss';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dashboardContent {
+  width: 1000px;
+  padding-bottom: 40px;
+
+  @include breakpoint('max-lg') {
+    width: 100%;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  @include breakpoint('max-md') {
+    width: 100%;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+
+  @include breakpoint('max-sm') {
+    width: 100%;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+.public-container {
+  width: 100%;
+  background: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+
+  min-height: calc(100vh - 60px);
+}
+
+.landing-container {
+  width: 100%;
+  height: 800px;
+  background: radial-gradient(
+      45.69% 126.01% at 43.23% 15.88%,
+      rgba(147, 112, 235, 0.5) 0%,
+      rgba(147, 112, 235, 0) 100%
+    ),
+    radial-gradient(
+      44.34% 95.75% at 98.13% -3.31%,
+      #2ebfa5 0%,
+      rgba(46, 191, 165, 0) 100%
+    ),
+    #452f7e;
+  border-radius: 0px 0px 60px 60px;
+
+  /* temp styles for test */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.grecaptcha-badge {
+  left: -186px !important;
+  right: unset !important;
+  z-index: 99;
+  transition: left 0.3s ease 0.1s !important;
+  visibility: hidden;
+
+  &:hover {
+    left: 0 !important;
+  }
+}
+
+.MuiDialogContent-root .PrivatePickersSlideTransition-root.css-dhopo2 {
+  min-height: 200px !important;
+}

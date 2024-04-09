@@ -1,0 +1,69 @@
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography';
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .wrapper {
+    width: 100%;
+    height: 44px;
+    border-radius: 6px;
+
+    input {
+      padding: 13px 20px;
+
+      @include caption1;
+      color: $black;
+
+      &::-ms-reveal,
+      &::-ms-clear {
+        display: none;
+      }
+    }
+  }
+
+  .multiline {
+    height: unset;
+    padding-right: 10px;
+
+    // textarea {
+    //     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    //     scrollbar-width: none;  /* Firefox */
+
+    //     &::-webkit-scrollbar{   /* Safari and Chrome */
+    //         display: none;
+    //     }
+    // }
+
+    textarea {
+      &::-webkit-scrollbar {
+        width: 5px;
+        // height: 2px;
+      }
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $darkGrey120;
+      }
+
+      &::-webkit-scrollbar-track-piece {
+        background: $gray;
+      }
+    }
+  }
+
+  .muiError {
+    .notchedOutline {
+      border-color: $warning !important;
+    }
+  }
+
+  .error {
+    @include caption1;
+    color: $warning;
+    margin-top: 5px;
+  }
+}

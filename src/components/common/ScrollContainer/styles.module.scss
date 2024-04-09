@@ -1,0 +1,96 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.container {
+  width: 100%;
+  position: relative;
+
+  .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: calc(100% - 20px);
+    background: linear-gradient(
+      90deg,
+      rgba(32, 22, 45, 0.2) 0%,
+      rgba(32, 22, 45, 0) 100%
+    );
+    z-index: 999;
+
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    // @include breakpoint("max-sm") {
+    //     height: 100%;
+    // }
+  }
+
+  .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: calc(100% - 20px);
+    background: linear-gradient(
+      270deg,
+      rgba(32, 22, 45, 0.2) 0%,
+      rgba(32, 22, 45, 0) 100%
+    );
+    z-index: 999;
+
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    // @include breakpoint("max-sm") {
+    //     height: 100%;
+    // }
+  }
+}
+
+.scrollElem {
+  width: 100%;
+  overflow-x: auto;
+
+  /* Works on Firefox */
+  scrollbar-color: rgba($black, 0.2) $pinkGray;
+
+  /* Works on Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
+    height: 10px;
+
+    // @include breakpoint("max-sm") {
+    //     display: none;
+    // }
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 0 10px;
+    border-radius: 20px;
+    background: $pinkGray;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($black, 0.2);
+    border-radius: 20px;
+  }
+
+  &.active {
+    padding-bottom: 10px;
+
+    // @include breakpoint("max-sm") {
+    //     padding-bottom: 0;
+    // }
+  }
+}

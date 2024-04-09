@@ -1,0 +1,58 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 41px;
+
+  .root {
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    border-radius: 20px;
+    align-items: center;
+
+    .switchBase {
+      color: $white;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      padding: 0;
+
+      .thumb {
+        width: 16px;
+        height: 16px;
+      }
+
+      &.checked + .track {
+        background-color: $green;
+        opacity: 1;
+      }
+    }
+
+    .track {
+      background-color: $gray;
+      opacity: 1;
+    }
+  }
+
+  .label {
+    @include bodySmall;
+    color: $black;
+    margin-left: 10px;
+  }
+}
+.error {
+  @include caption1;
+  color: $warning;
+  margin-top: 5px;
+}
+
+.disabled {
+  opacity: 0.7;
+  &:hover {
+    cursor: not-allowed;
+  }
+}

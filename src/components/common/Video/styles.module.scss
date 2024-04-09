@@ -1,0 +1,51 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    cursor: pointer;
+    background: rgba($color: $dark, $alpha: 0.1);
+  }
+
+  & > div > div[data-vimeo-initialized='true'] > iframe {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.playBtn {
+  width: 80px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  min-width: auto;
+  z-index: 1;
+
+  & > span {
+    margin: 0px;
+
+    & > svg {
+      font-size: 40px !important;
+      color: $white;
+    }
+  }
+
+  background: transparent;
+  border: 1px solid $gray;
+
+  &:hover {
+    background: $purple;
+  }
+}

@@ -1,0 +1,227 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.appbar {
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  z-index: 99;
+  background: $white;
+  padding: 0;
+  margin: 0;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+
+  @include breakpoint('max-lg') {
+    padding: 0 60px;
+  }
+
+  @include breakpoint('max-md') {
+    padding: 0 40px;
+  }
+
+  @include breakpoint('max-sm') {
+    padding: 0 20px;
+  }
+
+  .container {
+    width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoint('max-lg') {
+      width: 100%;
+    }
+
+    .logoWrapper {
+      display: flex;
+      align-items: center;
+
+      @include breakpoint('max-lg') {
+        width: fit-content;
+      }
+
+      .menuRoot {
+        display: none;
+
+        @include breakpoint('max-md') {
+          margin-right: 20px;
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          color: $dark;
+
+          &.homepage {
+            color: $white;
+          }
+
+          &.active {
+            background: rgba($color: $white, $alpha: 0.1);
+          }
+        }
+      }
+
+      .logo {
+        width: 125px;
+        height: 50px;
+        position: relative;
+        cursor: pointer;
+
+        // img {
+        //     width: 100%;
+        //     height: 100%;
+        // }
+      }
+    }
+
+    .menuWrapper {
+      width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .btnMenu {
+        @include text-16-500;
+        color: $dark;
+        transition: none;
+
+        & > span {
+          margin: 3px 0 0 5px;
+        }
+        &.active {
+          color: $darkGrey120;
+        }
+      }
+
+      @include breakpoint('max-lg') {
+        width: 400px;
+      }
+
+      @include breakpoint('max-md') {
+        display: none;
+      }
+    }
+
+    .actionContainer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      @include breakpoint('max-md') {
+        width: fit-content;
+      }
+
+      .btnLogin {
+        width: 161px;
+        color: $dark;
+        margin-right: 10px;
+
+        @include h5;
+
+        @include breakpoint('max-sm') {
+          width: 101px;
+          margin-right: 0;
+        }
+      }
+
+      .btnTry {
+        width: 150px;
+        @include h5;
+
+        box-shadow: 0px 4px 0px #573b9c;
+
+        @include breakpoint('max-sm') {
+          display: none;
+        }
+      }
+
+      .avatarWrapperRoot {
+        margin-left: 15px;
+        margin-right: 0;
+        border-radius: 7px;
+        padding: 8px 10px;
+
+        .avatarRoot {
+          border-radius: 6px;
+          background: $greyLight;
+          width: 30px;
+          height: 30px;
+
+          @include breakpoint('max-sm') {
+            margin-right: 0;
+          }
+        }
+
+        .avatarName {
+          @include breakpoint('max-sm') {
+            display: none;
+          }
+        }
+
+        .avatarIconProps {
+          @include breakpoint('max-sm') {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.announcement {
+  top: 60px;
+
+  @include breakpoint('max-sm') {
+    top: 0;
+  }
+}
+
+.promoBanner {
+  top: 80px;
+  @include breakpoint('max-sm') {
+    top: 0;
+  }
+}
+
+.homepage {
+  background: rgba(0, 0, 0, 0);
+
+  & > .container {
+    & > .menuWrapper > .btnMenu {
+      color: $white;
+
+      &.active {
+        color: rgba($color: $white, $alpha: 0.6);
+      }
+    }
+
+    & > .actionContainer {
+      & > .btnLogin {
+        color: $white;
+      }
+
+      & > .avatarWrapperRoot {
+        .avatarName {
+          color: $white;
+        }
+
+        .avatarIconProps {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+.userMenuContainer {
+  margin-top: 12px;
+}

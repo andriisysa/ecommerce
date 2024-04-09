@@ -1,0 +1,141 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.menuWrapper {
+  width: 100%;
+  padding: 0 40px;
+
+  @include breakpoint('max-sm') {
+    padding: 0 20px;
+  }
+}
+
+.container {
+  margin-top: 12px;
+  background: $white;
+  border-radius: 20px;
+
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+
+  .content {
+    padding: 20px 20px 40px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    .menuItem {
+      padding: 20px;
+      margin: 0;
+      border-radius: 12px;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include h2;
+      font-weight: 500;
+      color: $dark;
+
+      &:hover {
+        background: $gray;
+      }
+    }
+
+    .courses {
+      display: flex;
+      flex-direction: column;
+      border-radius: 12px;
+      overflow: hidden;
+
+      &.active {
+        background: $pinkGray;
+      }
+    }
+
+    .subjectList {
+      display: flex;
+      flex-direction: column;
+
+      .subjectItem {
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: $pinkGray;
+        cursor: pointer;
+
+        &:hover {
+          background: $gray;
+        }
+
+        .groundImg {
+          width: 33.33px;
+          height: 32px;
+          margin-right: 20px;
+          position: relative;
+
+          &.comming {
+            mix-blend-mode: normal;
+            opacity: 0.4;
+          }
+        }
+
+        .subject {
+          display: flex;
+          flex-direction: column;
+
+          .title {
+            @include bodyBold;
+            font-weight: 500;
+            color: $dark;
+
+            &.comming {
+              color: rgba($color: $dark, $alpha: 0.2);
+            }
+
+            span {
+              margin-left: 10px;
+              background: $lightGreen;
+              border-radius: 4px;
+              padding: 2px 5px;
+
+              @include caption2;
+              color: $green;
+            }
+          }
+
+          .year {
+            @include bodySmall;
+            font-weight: 400;
+            color: $darkGrey120;
+
+            &.comming {
+              color: rgba($color: $dark, $alpha: 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    border-top: 1px solid $gray;
+
+    .action {
+      width: 100%;
+      height: 48px;
+      border-radius: 12px;
+    }
+
+    @include breakpoint('max-sm') {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

@@ -1,0 +1,60 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.modalRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba($color: $dark, $alpha: 0.8);
+
+  @include breakpoint('max-sm') {
+    background: $dark;
+  }
+}
+
+.container {
+  width: 1200px;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  position: relative;
+
+  .closeBtn {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba($white, 0.2);
+    min-width: unset;
+    background: transparent;
+
+    & > span {
+      margin: 0;
+    }
+  }
+
+  @include breakpoint('max-lg') {
+    width: 100%;
+    margin: 0 60px;
+  }
+
+  @include breakpoint('max-md') {
+    margin: 0 40px;
+  }
+
+  @include breakpoint('max-sm') {
+    margin: 0;
+
+    .closeBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+  }
+}

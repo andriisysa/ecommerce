@@ -1,0 +1,44 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  background:
+    linear-gradient(360deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(
+        56.22% 86.84% at 45.97% 77.27%,
+        rgba(147, 112, 235, 0.5) 0%,
+        rgba(147, 112, 235, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        101.08% 89.55% at -48.02% 12.69%,
+        #2ebfa5 0%,
+        rgba(46, 191, 165, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #452f7e;
+  mix-blend-mode: normal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.player {
+  width: 30%;
+  height: 30%;
+
+  @include breakpoint('max-sm') {
+    width: 40%;
+    height: 40%;
+  }
+}

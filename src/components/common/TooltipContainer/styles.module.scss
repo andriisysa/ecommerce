@@ -1,0 +1,72 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.wrapper {
+  position: relative;
+
+  .content {
+    padding: 10px;
+    background: $lightPurple;
+    border-radius: 6px;
+    width: 300px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    p {
+      @include textSmall;
+      color: $white;
+      margin: 0;
+    }
+
+    @include breakpoint('max-xs') {
+      width: calc(100vw - 40px);
+    }
+  }
+
+  .arrowLeft {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -9px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid $lightPurple;
+  }
+
+  .arrowRight {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -9px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid $lightPurple;
+  }
+
+  .arrowTop {
+    position: absolute;
+    top: -9px;
+    transform: translateX(-50%);
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $lightPurple;
+  }
+
+  .arrowBottom {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: -9px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid $lightPurple;
+  }
+}

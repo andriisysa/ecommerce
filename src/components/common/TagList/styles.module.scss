@@ -1,0 +1,37 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.listContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  @include breakpoint('max-sm') {
+    flex-wrap: wrap;
+  }
+}
+
+.itemWrapper {
+  width: auto;
+
+  .btnHalfCircle {
+    background: $white;
+    color: $darkGrey;
+    border: none;
+    border-radius: 25px;
+
+    &.active {
+      background: $lightPurple;
+      border-radius: 25px;
+      color: $white;
+    }
+  }
+}
+
+.loadingItem {
+  border-radius: 25px;
+  width: 90px;
+  font-size: 38px !important;
+  margin-right: 5px;
+}

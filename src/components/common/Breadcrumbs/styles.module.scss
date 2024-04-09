@@ -1,0 +1,47 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.root {
+  .ol {
+    row-gap: 10px;
+  }
+
+  .li {
+    @include h2;
+    font-weight: 700;
+    color: $black;
+
+    & > a {
+      @include h2;
+      color: $darkGrey;
+    }
+
+    @include breakpoint('max-sm') {
+      display: inline-block;
+    }
+  }
+
+  // .li:last-child {
+  //     @include breakpoint("max-sm") {
+  //         margin-top: 10px;
+  // 	}
+  // }
+
+  .separatorLi {
+    margin: 0px 10px;
+    // @include breakpoint("max-sm") {
+    //     flex-basis: 60%;
+    // }
+  }
+}
+
+.separator {
+  color: $darkGrey;
+  width: 24px;
+  height: 24px;
+
+  @include breakpoint('max-sm') {
+    display: block;
+  }
+}

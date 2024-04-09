@@ -1,0 +1,40 @@
+@import '@/styles/variables/_breakpoint.scss';
+@import '@/styles/variables/_color.scss';
+@import '@/styles/variables/_typography.scss';
+
+.popper {
+  z-index: 10;
+}
+
+.container {
+  margin-top: 7px;
+  background: $white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+
+  .menuItem {
+    width: 240px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    border-bottom: 1px solid $gray;
+
+    @include caption1;
+    font-weight: 500;
+    color: $black;
+
+    &:last-child {
+      border: none;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+  }
+}

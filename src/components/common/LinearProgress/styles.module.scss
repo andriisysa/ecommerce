@@ -1,0 +1,60 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .progressWrapper {
+    position: relative;
+    width: 100%;
+
+    .progressProps {
+      min-width: 153px;
+      height: 30px;
+      border-radius: 30px;
+      background: $pinkGray;
+
+      .bar {
+        background: $lightPurple;
+      }
+
+      .barComplete {
+        background: $green;
+      }
+    }
+
+    .label {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+
+      @include bodySmall;
+      color: $white;
+      font-weight: bold;
+    }
+  }
+
+  .text {
+    margin-left: 10px;
+    width: 37px;
+    text-align: end;
+
+    @include bodySmall;
+    font-weight: bold;
+    color: rgba($color: $black, $alpha: 0.8);
+  }
+
+  .textComplete {
+    color: $green;
+  }
+}
