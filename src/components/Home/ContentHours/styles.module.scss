@@ -1,0 +1,230 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 40px;
+
+  @include breakpoint('max-md') {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .textSection {
+    width: 1155px;
+    height: 604px;
+    background: $green120;
+    border-radius: 0px 40px 40px 0px;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      width: 399px;
+      margin-right: -8%;
+      z-index: 1;
+
+      h1 {
+        @include h1;
+        margin: 0;
+        font-size: 48px;
+        color: $white;
+        margin-bottom: 20px;
+      }
+
+      span {
+        @include text-1;
+        color: $white;
+        width: 339px;
+      }
+
+      .tryBtn {
+        margin-top: 40px;
+        width: 150px;
+        height: 48px;
+        background: $purple;
+        border-radius: 12px;
+        box-shadow: 0px 4px 0px #573b9c;
+      }
+    }
+
+    .benchImg {
+      position: absolute;
+      width: 700px;
+      height: 100%;
+      left: 0;
+      top: 0;
+
+      & > img {
+        object-fit: cover;
+      }
+    }
+
+    @include breakpoint('max-lg') {
+      justify-content: flex-start;
+
+      .content {
+        margin: 0 0 0 60px;
+      }
+    }
+
+    @include breakpoint('max-md') {
+      width: 100%;
+      height: 800px;
+      border-radius: 0;
+      justify-content: center;
+      align-items: flex-start;
+
+      .content {
+        margin: 140px 0 0 0;
+        text-align: center;
+        align-items: center;
+      }
+    }
+
+    @include breakpoint('max-sm') {
+      height: 679px;
+
+      .content {
+        margin: 100px 0 0 0;
+
+        h1 {
+          font-size: 36px;
+        }
+      }
+
+      .benchImg {
+        width: 100%;
+        top: 180px;
+      }
+    }
+  }
+
+  .sliderSection {
+    margin-left: -190px;
+    z-index: 1;
+
+    width: 610px;
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    .slider {
+      width: 610px;
+      height: 400px;
+      position: relative;
+
+      .text {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.8) 0.54%,
+          rgba(0, 0, 0, 0) 35.5%
+        );
+        filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.25));
+        background-size: cover;
+
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+
+        h1 {
+          @include h1;
+          color: $white;
+          margin: 0 0 40px 40px;
+        }
+
+        .subject {
+          padding: 5px 10px;
+          border-radius: 30px;
+          background: rgba(180, 171, 203, 0.2);
+
+          @include btnText;
+          color: $white;
+          margin: 0 0 10px 40px;
+        }
+
+        @include breakpoint('max-sm') {
+          h1 {
+            font-size: 20px;
+            margin: 0 0 20px 20px;
+          }
+
+          .subject {
+            padding: 5px 10px;
+            font-size: 12px;
+            margin: 0 0 10px 20px;
+          }
+        }
+      }
+    }
+
+    @include breakpoint('max-lg') {
+      margin-left: -235px;
+      width: 462px;
+      height: 400px;
+
+      .slider {
+        width: 462px;
+        height: 400px;
+      }
+    }
+
+    @include breakpoint('max-md') {
+      margin: -175px 0 0 0;
+      width: calc(100% - 80px);
+      height: 350px;
+
+      .slider {
+        width: 100%;
+        height: 350px;
+      }
+    }
+
+    @include breakpoint('max-sm') {
+      margin: -125px 0 0 0;
+      width: calc(100% - 40px);
+      height: 250px;
+
+      .slider {
+        height: 250px;
+      }
+    }
+  }
+}
+
+.carousel :global {
+  width: 100%;
+  height: 100%;
+
+  .carousel {
+    .control-dots {
+      top: 40px;
+      margin: 0;
+      height: fit-content;
+
+      .dot {
+        width: 50px;
+        height: 4px;
+        border-radius: 4px;
+      }
+    }
+
+    .slider-wrapper {
+      border-radius: 12px;
+    }
+  }
+}

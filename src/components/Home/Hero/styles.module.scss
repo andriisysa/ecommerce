@@ -1,0 +1,213 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.section {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+
+  background: linear-gradient(
+      360deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    radial-gradient(
+      56.22% 86.84% at 45.97% 77.27%,
+      rgba(147, 112, 235, 0.5) 0%,
+      rgba(147, 112, 235, 0) 100%
+    ),
+    radial-gradient(
+      101.08% 89.55% at -48.02% 12.69%,
+      #2ebfa5 0%,
+      rgba(46, 191, 165, 0) 100%
+    ),
+    #452f7e;
+
+  .container {
+    width: 1440px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-bottom: 400px;
+
+    @include breakpoint('max-sm') {
+      width: 100%;
+      padding-bottom: calc(100vw * 9 / 32 + 100px);
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      width: 507px;
+      margin-top: 192px;
+      z-index: 1;
+
+      @include breakpoint('max-md') {
+        width: 367px;
+      }
+
+      h1 {
+        @include h1;
+        margin: 0;
+        color: $white;
+        font-size: 64px;
+        line-height: 130%;
+        margin-bottom: 20px;
+
+        @include breakpoint('max-md') {
+          font-size: 48px;
+        }
+      }
+
+      span {
+        @include h2;
+        font-weight: 400;
+        color: rgba($color: $white, $alpha: 0.8);
+
+        @include breakpoint('max-md') {
+          font-size: 20px;
+        }
+      }
+
+      .tryForFree {
+        margin-top: 68px;
+        width: 229px;
+        height: 69px;
+        box-shadow: 0px 4px 0px #573b9c;
+
+        @include h2;
+
+        @include breakpoint('max-md') {
+          width: 211px;
+          height: 64px;
+          margin-top: 50px;
+        }
+      }
+    }
+
+    .planetWithBlocks {
+      position: absolute;
+      left: -430px;
+      top: 140px;
+      width: 800px;
+      height: 800px;
+
+      @include breakpoint('max-md') {
+        width: 600px;
+        height: 600px;
+        left: -250px;
+        top: 200px;
+      }
+
+      @include breakpoint('max-sm') {
+        display: none;
+      }
+    }
+
+    .spaceman {
+      position: absolute;
+      right: 13px;
+      top: 197px;
+
+      width: 443px;
+      height: auto;
+      object-fit: cover;
+
+      @include breakpoint('max-md') {
+        width: 300px;
+        right: 180px;
+        top: 250px;
+      }
+
+      @include breakpoint('max-sm') {
+        display: none;
+      }
+    }
+
+    .planet {
+      position: absolute;
+      right: -250px;
+      top: 520px;
+
+      width: 557px;
+      height: auto;
+      object-fit: cover;
+
+      @include breakpoint('max-md') {
+        width: 400px;
+        right: 0;
+        top: 500px;
+      }
+
+      @include breakpoint('max-sm') {
+        display: none;
+      }
+    }
+  }
+}
+
+.player {
+  width: 805px;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 35px;
+  border: 20px solid $dark;
+  z-index: 1;
+  background: $dark;
+  position: relative;
+  transform: translateY(-50%);
+
+  @include breakpoint('max-md') {
+    width: calc(100vw - 80px);
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  @include breakpoint('max-sm') {
+    width: calc(100vw - 40px);
+    border: 10px solid $dark;
+  }
+
+  .video {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .switch1 {
+    position: absolute;
+    width: 5%;
+    height: 11px;
+    top: -26px;
+    right: 22%;
+    border-radius: 10px;
+    background: $dark;
+
+    @include breakpoint('max-sm') {
+      top: -16px;
+    }
+  }
+
+  .switch2 {
+    position: absolute;
+    width: 5%;
+    height: 11px;
+    top: -26px;
+    right: 15%;
+    border-radius: 10px;
+    background: $dark;
+
+    @include breakpoint('max-sm') {
+      top: -16px;
+    }
+  }
+}

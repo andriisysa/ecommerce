@@ -1,0 +1,85 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.container {
+  width: 295px;
+  padding: 50px 20px;
+  border-radius: 20px;
+  background: $white;
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  @include breakpoint('max-lg') {
+    width: 100%;
+  }
+
+  @include breakpoint('max-sm') {
+    &.commingSoon {
+      display: none;
+    }
+  }
+
+  .statusWrapper {
+    width: 100%;
+    height: 31px;
+    visibility: hidden;
+
+    .status {
+      width: fit-content;
+      padding: 5px 10px;
+      border-radius: 10px;
+      background: #ddf5f1;
+
+      @include h5;
+      color: $green;
+    }
+
+    &.commingSoon {
+      visibility: visible;
+    }
+  }
+
+  .image {
+    width: 83.33px;
+    height: 80px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: relative;
+
+    &.commingSoon {
+      // mix-blend-mode: luminosity;
+      mix-blend-mode: normal;
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+
+  .subject {
+    margin-top: 40px;
+
+    @include h2;
+    color: $dark;
+    cursor: pointer;
+
+    &.commingSoon {
+      color: rgba($color: $dark, $alpha: 0.2);
+      cursor: not-allowed;
+    }
+  }
+
+  .years {
+    margin-top: 10px;
+
+    @include h4;
+    color: $darkGrey120;
+
+    &.commingSoon {
+      color: rgba($color: $dark, $alpha: 0.2);
+    }
+  }
+}

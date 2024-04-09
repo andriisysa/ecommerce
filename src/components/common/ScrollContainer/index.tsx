@@ -45,7 +45,7 @@ const ScrollContainer = (props: IBaseUIProps) => {
         window.removeEventListener('resize', handleScroll);
       }
     };
-  }, [ref]);
+  }, [ref, handleScroll]);
 
   return (
     <div className={styles.container}>

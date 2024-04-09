@@ -40,7 +40,7 @@ const Select = (props: ISelectProps) => {
     if (value) {
       if (value.value !== selectedValue) setSelectedValue(value.value);
     } else setSelectedValue('');
-  }, [value]);
+  }, [value, setSelectedValue]);
 
   const handleChange = (event: SelectChangeEvent) => {
     if (onChange) onChange(event.target.value);

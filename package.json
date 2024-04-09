@@ -26,7 +26,9 @@
     "react-dom": "^18",
     "react-player": "^2.15.1",
     "react-redux": "^9.1.0",
+    "react-responsive-carousel": "^3.2.23",
     "sass": "^1.74.1",
+    "sharp": "^0.33.3",
     "swiper": "^11.1.0"
   },
   "devDependencies": {

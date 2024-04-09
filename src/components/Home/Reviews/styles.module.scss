@@ -1,0 +1,127 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $white;
+  padding: 140px 0;
+
+  h1 {
+    width: fit-content;
+    @include h1;
+    margin: 0;
+    font-size: 48px;
+    color: $dark;
+    text-align: center;
+
+    @include breakpoint('max-sm') {
+      font-size: 36px;
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+
+  p {
+    width: fit-content;
+    @include body;
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    text-align: center;
+
+    @include breakpoint('max-sm') {
+      font-size: 18px;
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+
+  .content {
+    width: 100%;
+    overflow: hidden;
+
+    .reviews {
+      margin-top: 60px;
+      display: flex;
+      width: fit-content;
+      padding-bottom: 4px;
+      animation: 100s linear 0s infinite normal none running keyframes-slide;
+
+      &:hover {
+        animation-play-state: paused;
+      }
+
+      .card {
+        width: 390px;
+        height: auto;
+        min-height: 250px;
+        border: 1px solid $gray;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 16px;
+        padding: 20px;
+
+        .container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+
+          .userInfo {
+            display: flex;
+            align-items: center;
+
+            .avatarRoot {
+              width: 48px;
+              height: 48px;
+            }
+
+            .avatarName {
+              @include body;
+              font-size: 20px;
+              font-weight: bold;
+
+              @include breakpoint('max-sm') {
+                font-size: 18px;
+              }
+            }
+          }
+
+          p {
+            margin: 15px 0 0 0;
+            @include body;
+            color: $darkGrey;
+            text-align: left;
+
+            @include breakpoint('max-sm') {
+              font-size: 14px;
+            }
+          }
+        }
+
+        @include breakpoint('max-sm') {
+          width: calc(100vw - 40px);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+        }
+      }
+
+      .card + .card {
+        margin-left: 20px;
+      }
+    }
+
+    @keyframes keyframes-slide {
+      0% {
+        transform: translateX(80px);
+
+        @include breakpoint('max-sm') {
+          transform: translateX(0);
+        }
+      }
+      100% {
+        transform: translateX(calc(-100% + 100vw - 200px));
+      }
+    }
+  }
+}

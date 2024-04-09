@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import Grow from '@mui/material/Grow';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
@@ -20,26 +20,29 @@ const Menu = (props: IMenuProps) => {
     classes: { menuWrapper, container, menuProps, iconProps } = {},
   } = props;
 
-  const menuRef = React.useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const onClick = (e: MouseEvent) => {
-    const elm = e.target as Element;
-    if (
-      anchorRef?.current &&
-      (anchorRef.current.contains(elm) ||
-        (menuRef && menuRef.current && menuRef.current.contains(elm)))
-    )
-      return;
-    onClose();
-  };
+  const onClick = useCallback(
+    (e: MouseEvent) => {
+      const elm = e.target as Element;
+      if (
+        anchorRef?.current &&
+        (anchorRef.current.contains(elm) ||
+          (menuRef && menuRef.current && menuRef.current.contains(elm)))
+      )
+        return;
+      onClose();
+    },
+    [anchorRef, menuRef, onClose]
+  );
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('click', onClick);
 
     return () => {
       window.removeEventListener('click', onClick);
     };
-  }, []);
+  }, [onClick]);
 
   return (
     <Popper

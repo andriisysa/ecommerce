@@ -26,7 +26,7 @@ const AnimationArrow = ({
     return () => {
       clearInterval(i);
     };
-  }, []);
+  }, [setArrows, min, max, interval]);
 
   return (
     <Stack direction="row" alignItems="center">
