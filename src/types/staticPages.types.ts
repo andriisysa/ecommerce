@@ -76,3 +76,20 @@ export interface IHomePageData {
   reviews: IHomeReviews;
   funs: IHomeFun;
 }
+
+export interface IFAQ {
+  id: string;
+  question: string;
+  answer: string;
+  image?: IImage;
+}
+export interface IFAQSubject {
+  id: string;
+  subject: string;
+  questions: IFAQ[];
+}
+
+export interface IFAQData {
+  id: string;
+  faqs: IFAQSubject[];
+}

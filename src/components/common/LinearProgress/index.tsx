@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NoSsr } from '@mui/material';
 import MuiLinearProgress from '@mui/material/LinearProgress';
 import cn from 'classnames';
 
@@ -30,16 +31,18 @@ const LinearProgress = (props: ILinearProgressProps) => {
   return (
     <div className={cn(styles.container, container)}>
       <div className={cn(styles.progressWrapper, progressWrapper)}>
-        <MuiLinearProgress
-          variant="determinate"
-          value={value}
-          classes={{
-            root: cn(styles.progressProps, progressProps),
-            bar: cn(styles.bar, barProps, {
-              [styles.barComplete]: value === 100,
-            }),
-          }}
-        />
+        <NoSsr>
+          <MuiLinearProgress
+            variant="determinate"
+            value={value}
+            classes={{
+              root: cn(styles.progressProps, progressProps),
+              bar: cn(styles.bar, barProps, {
+                [styles.barComplete]: value === 100,
+              }),
+            }}
+          />
+        </NoSsr>
         {value && showLabel && (
           <div className={cn(styles.label, label)}>
             {completion || value} / {total || 100}

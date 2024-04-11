@@ -6,8 +6,12 @@ import {
   type TypedUseSelectorHook,
 } from 'react-redux';
 
+import appReducer from './slices/app';
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    app: appReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

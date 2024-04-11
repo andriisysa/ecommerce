@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   MenuItem,
   Select as MuiSelect,
+  NoSsr,
   OutlinedInput,
   SelectChangeEvent,
 } from '@mui/material';
@@ -47,7 +48,7 @@ const Select = (props: ISelectProps) => {
   };
 
   return (
-    <>
+    <NoSsr>
       <MuiSelect
         displayEmpty
         open={isOpen}
@@ -97,7 +98,7 @@ const Select = (props: ISelectProps) => {
         ))}
       </MuiSelect>
       {error && <span className={styles.error}>{error}</span>}
-    </>
+    </NoSsr>
   );
 };
 

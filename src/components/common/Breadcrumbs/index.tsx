@@ -1,6 +1,7 @@
 import { Route } from 'next';
 import { useRouter } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { NoSsr } from '@mui/material';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 
@@ -25,35 +26,37 @@ const Breadcrumbs = (props: IBreadcrumbsProps) => {
   }
 
   return (
-    <MuiBreadcrumbs
-      separator={
-        <NavigateNextIcon
-          fontSize="small"
-          classes={{ root: styles.separator }}
-        />
-      }
-      classes={{
-        root: styles.root,
-        ol: styles.ol,
-        li: styles.li,
-        separator: styles.separatorLi,
-      }}
-    >
-      {(items || []).map((item, id) =>
-        item.link ? (
-          <Link
-            key={id}
-            underline="hover"
-            href={item.link}
-            onClick={(e) => handleClick(e, item.link)}
-          >
-            {item.label}
-          </Link>
-        ) : (
-          <span key={id}>{item.label}</span>
-        )
-      )}
-    </MuiBreadcrumbs>
+    <NoSsr>
+      <MuiBreadcrumbs
+        separator={
+          <NavigateNextIcon
+            fontSize="small"
+            classes={{ root: styles.separator }}
+          />
+        }
+        classes={{
+          root: styles.root,
+          ol: styles.ol,
+          li: styles.li,
+          separator: styles.separatorLi,
+        }}
+      >
+        {(items || []).map((item, id) =>
+          item.link ? (
+            <Link
+              key={id}
+              underline="hover"
+              href={item.link}
+              onClick={(e) => handleClick(e, item.link)}
+            >
+              {item.label}
+            </Link>
+          ) : (
+            <span key={id}>{item.label}</span>
+          )
+        )}
+      </MuiBreadcrumbs>
+    </NoSsr>
   );
 };
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { NoSsr } from '@mui/material';
 import classNames from 'classnames';
 
 import { IButtonProps } from './Button.types';
@@ -52,46 +53,48 @@ const Button = React.forwardRef(
     };
 
     return (
-      <LoadingButton
-        ref={ref}
-        loading={loading}
-        disableRipple={disableRipple}
-        disabled={loading || disabled}
-        startIcon={iconPosition === 'start' && icon}
-        endIcon={iconPosition === 'end' && icon}
-        onClick={onButtonClick}
-        style={{ textTransform: 'none' }}
-        classes={{
-          root: classNames(styles.root, root, {
-            [styles.outlined]: variant === 'outlined',
-            [styles.outlined_green]: variant === 'text',
-            [styles.purple]: variant === 'purple',
-            [styles.warning]: variant === 'warning',
-            [styles.isChild]: isChild,
-            [styles.clean]: clean,
-            [styles.disabled]: disabled || loading,
-          }),
-        }}
-        {...rest}
-      >
-        {text}
+      <NoSsr>
+        <LoadingButton
+          ref={ref}
+          loading={loading}
+          disableRipple={disableRipple}
+          disabled={loading || disabled}
+          startIcon={iconPosition === 'start' && icon}
+          endIcon={iconPosition === 'end' && icon}
+          onClick={onButtonClick}
+          style={{ textTransform: 'none' }}
+          classes={{
+            root: classNames(styles.root, root, {
+              [styles.outlined]: variant === 'outlined',
+              [styles.outlined_green]: variant === 'text',
+              [styles.purple]: variant === 'purple',
+              [styles.warning]: variant === 'warning',
+              [styles.isChild]: isChild,
+              [styles.clean]: clean,
+              [styles.disabled]: disabled || loading,
+            }),
+          }}
+          {...rest}
+        >
+          {text}
 
-        {file && (
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept={acceptFileTypes && acceptFileTypes.join(',')}
-            multiple={isMulti}
-            onChange={onFileChange}
-            style={{
-              visibility: 'hidden',
-              width: 0,
-              height: 0,
-              position: 'absolute',
-            }}
-          />
-        )}
-      </LoadingButton>
+          {file && (
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={acceptFileTypes && acceptFileTypes.join(',')}
+              multiple={isMulti}
+              onChange={onFileChange}
+              style={{
+                visibility: 'hidden',
+                width: 0,
+                height: 0,
+                position: 'absolute',
+              }}
+            />
+          )}
+        </LoadingButton>
+      </NoSsr>
     );
   }
 );

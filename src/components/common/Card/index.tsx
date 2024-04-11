@@ -1,4 +1,5 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { NoSsr } from '@mui/material';
 import classNames from 'classnames';
 
 import { ICardProps } from './Card.types';
@@ -31,7 +32,9 @@ const Card = (props: ICardProps) => {
 
       {green && showCheckIcon && (
         <div className={styles.greenCheck}>
-          <CheckCircleIcon />
+          <NoSsr>
+            <CheckCircleIcon />
+          </NoSsr>
         </div>
       )}
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NoSsr } from '@mui/material';
 import MuiSwitch from '@mui/material/Switch';
 import classNames from 'classnames';
 
@@ -20,7 +21,7 @@ const Switch = (props: ISwitchProps) => {
   };
 
   return (
-    <>
+    <NoSsr>
       <div className={classNames(styles.wrapper, wrapper)}>
         <MuiSwitch
           disabled={disabled}
@@ -41,7 +42,7 @@ const Switch = (props: ISwitchProps) => {
         )}
       </div>
       {error && <span className={styles.error}>{error}</span>}
-    </>
+    </NoSsr>
   );
 };
 

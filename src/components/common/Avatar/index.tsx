@@ -1,3 +1,4 @@
+import { NoSsr } from '@mui/material';
 import MuiAvatar from '@mui/material/Avatar';
 import classNames from 'classnames';
 
@@ -22,56 +23,58 @@ const Avatar = (props: IAvartarProps) => {
 
   return (
     <div className={classNames(styles.wrapper, wrapper)}>
-      {imgUrl ? (
-        <MuiAvatar
-          alt="Remy Sharp"
-          src={imgUrl}
-          variant={variant}
-          classes={{
-            root: classNames(styles.avatarRoot, avatarRoot),
-          }}
-        />
-      ) : name ? (
-        <MuiAvatar
-          variant={variant}
-          classes={{
-            root: classNames(styles.avatarRoot, avatarRoot),
-          }}
-        >
-          {name
-            .split(' ')
-            .slice(0, 2)
-            .map((st) => st.charAt(0).toUpperCase())}
-        </MuiAvatar>
-      ) : firstName ? (
-        <MuiAvatar
-          variant={variant}
-          classes={{
-            root: classNames(styles.avatarRoot, avatarRoot),
-          }}
-        >
-          {firstName.charAt(0).toUpperCase()}
-          {lastName?.charAt(0).toUpperCase()}
-        </MuiAvatar>
-      ) : email ? (
-        <MuiAvatar
-          variant={variant}
-          classes={{
-            root: classNames(styles.avatarRoot, avatarRoot),
-          }}
-        >
-          {email.charAt(0).toUpperCase()}@
-        </MuiAvatar>
-      ) : (
-        <MuiAvatar
-          variant={variant}
-          classes={{
-            root: classNames(styles.avatarRoot, avatarRoot),
-          }}
-        >
-          GS
-        </MuiAvatar>
-      )}
+      <NoSsr>
+        {imgUrl ? (
+          <MuiAvatar
+            alt="Remy Sharp"
+            src={imgUrl}
+            variant={variant}
+            classes={{
+              root: classNames(styles.avatarRoot, avatarRoot),
+            }}
+          />
+        ) : name ? (
+          <MuiAvatar
+            variant={variant}
+            classes={{
+              root: classNames(styles.avatarRoot, avatarRoot),
+            }}
+          >
+            {name
+              .split(' ')
+              .slice(0, 2)
+              .map((st) => st.charAt(0).toUpperCase())}
+          </MuiAvatar>
+        ) : firstName ? (
+          <MuiAvatar
+            variant={variant}
+            classes={{
+              root: classNames(styles.avatarRoot, avatarRoot),
+            }}
+          >
+            {firstName.charAt(0).toUpperCase()}
+            {lastName?.charAt(0).toUpperCase()}
+          </MuiAvatar>
+        ) : email ? (
+          <MuiAvatar
+            variant={variant}
+            classes={{
+              root: classNames(styles.avatarRoot, avatarRoot),
+            }}
+          >
+            {email.charAt(0).toUpperCase()}@
+          </MuiAvatar>
+        ) : (
+          <MuiAvatar
+            variant={variant}
+            classes={{
+              root: classNames(styles.avatarRoot, avatarRoot),
+            }}
+          >
+            GS
+          </MuiAvatar>
+        )}
+      </NoSsr>
 
       {showName && name && (
         <span className={classNames(styles.avatarName, avatarName)}>

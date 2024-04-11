@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion as MuiAccordion } from '@mui/material';
+import { Accordion as MuiAccordion, NoSsr } from '@mui/material';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
@@ -19,7 +19,7 @@ const Accordion = (props: IAccordionProps) => {
   } = props;
 
   return (
-    <div>
+    <NoSsr>
       <MuiAccordion
         classes={{
           root: cn(styles.rootWrapper, accordionRoot, {
@@ -59,7 +59,7 @@ const Accordion = (props: IAccordionProps) => {
           {children}
         </AccordionDetails>
       </MuiAccordion>
-    </div>
+    </NoSsr>
   );
 };
 

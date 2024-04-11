@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
+import { NoSsr } from '@mui/material';
 import cn from 'classnames';
+import ReactPlayer from 'react-player';
 
 import styles from './styles.module.scss';
 import { IVideoProps } from './Video.types';
 import VideoModal from './VideoModal';
-
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 const Video = (props: IVideoProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,31 +39,33 @@ const Video = (props: IVideoProps) => {
       className={cn(styles.container, wrapper)}
       style={{ height: `${height}px` }}
     >
-      <ReactPlayer
-        // ref={ref}
-        url={url}
-        width="100%"
-        height="100%"
-        controls
-        {...rest}
-        // light
-        // playIcon={
-        //     <Button
-        //         classes={{ root: styles.playBtn }}
-        //         icon={<PlayArrowIcon />}
-        //     />
-        // }
-        // onClickPreview={() => {}}
-        // config={{
-        //     vimeo: {
-        //         playerOptions: {
-        //             controls: 1,
-        //             height: height,
-        //             width: "100%"
-        //         }
-        //     },
-        // }}
-      />
+      <NoSsr>
+        <ReactPlayer
+          // ref={ref}
+          url={url}
+          width="100%"
+          height="100%"
+          controls
+          {...rest}
+          // light
+          // playIcon={
+          //     <Button
+          //         classes={{ root: styles.playBtn }}
+          //         icon={<PlayArrowIcon />}
+          //     />
+          // }
+          // onClickPreview={() => {}}
+          // config={{
+          //     vimeo: {
+          //         playerOptions: {
+          //             controls: 1,
+          //             height: height,
+          //             width: "100%"
+          //         }
+          //     },
+          // }}
+        />
+      </NoSsr>
       {/* <div
                 className={styles.mask}
                 onClick={() => setVideoModalOpen(true)}

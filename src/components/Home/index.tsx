@@ -1,9 +1,10 @@
 'use client';
 
-import { IHomePageData } from '@/types/staticPages.types';
+import { IFAQData, IHomePageData } from '@/types/staticPages.types';
 
 import ContentHours from './ContentHours';
 import Courses from './Courses';
+import Faq from './Faq';
 import Hero from './Hero';
 import LearningFun from './LearingFun';
 import Reviews from './Reviews';
@@ -13,9 +14,10 @@ import Testimonials from './Testimonials';
 
 interface IProps {
   data: IHomePageData;
+  faqData?: IFAQData;
 }
 
-const Home = ({ data }: IProps) => {
+const Home = ({ data, faqData }: IProps) => {
   return (
     <div className={styles.container}>
       <Hero data={data.hero} />
@@ -24,9 +26,10 @@ const Home = ({ data }: IProps) => {
       <Testimonials data={data.testimonials} />
       <LearningFun data={data.funs} />
       <Reviews data={data.reviews} />
+      <Faq data={faqData?.faqs} />
       {/*
       <SubscriptionPlans />
-      <Faq /> */}
+      */}
     </div>
   );
 };
