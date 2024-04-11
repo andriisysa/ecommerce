@@ -7,6 +7,7 @@ import { IButtonProps } from './Button.types';
 // styles
 import styles from './styles.module.scss';
 
+// eslint-disable-next-line react/display-name
 const Button = React.forwardRef(
   (props: IButtonProps, ref?: React.ForwardedRef<HTMLButtonElement>) => {
     const fileInputRef = React.useRef<HTMLInputElement>(null);
