@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import cn from 'classnames';
-import ReactPlayer from 'react-player';
 
 import styles from './styles.module.scss';
 import { IVideoProps } from './Video.types';
 import VideoModal from './VideoModal';
+
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 const Video = (props: IVideoProps) => {
   const ref = useRef<HTMLDivElement>(null);

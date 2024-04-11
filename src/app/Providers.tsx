@@ -7,18 +7,22 @@ import { Provider } from 'react-redux';
 
 import { store } from '@/redux/store';
 
+import NextAppDirEmotionCacheProvider from './emotion-cache';
+
 const Providers = ({ children }: PropsWithChildren) => (
-  <Provider store={store}>
-    <SnackbarProvider
-      maxSnack={4}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-    >
-      <StyledEngineProvider injectFirst>{children}</StyledEngineProvider>
-    </SnackbarProvider>
-  </Provider>
+  <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
+    <Provider store={store}>
+      <SnackbarProvider
+        maxSnack={4}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+      >
+        <StyledEngineProvider injectFirst>{children}</StyledEngineProvider>
+      </SnackbarProvider>
+    </Provider>
+  </NextAppDirEmotionCacheProvider>
 );
 
 export default Providers;
