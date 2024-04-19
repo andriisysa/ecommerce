@@ -2,6 +2,19 @@
 @import '@/styles/variables/_color.scss';
 @import '@/styles/variables/_typography.scss';
 
+.component {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .loading {
+    position: absolute;
+  }
+}
+
 .inputRoot {
   display: flex;
   width: 100%;

@@ -1,0 +1,26 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.container {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    width: fit-content;
+    @include h1;
+    margin: 0;
+    font-size: 42px;
+    color: $dark;
+    text-align: center;
+    margin-bottom: 40px;
+
+    @include breakpoint('max-sm') {
+      font-size: 32px;
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+}

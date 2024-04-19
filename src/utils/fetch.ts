@@ -10,7 +10,7 @@ const request = async <T>(
     const res = await fetch(`${baseUrl}${path}`, {
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': String(process.env.X_API_KEY),
+        'x-api-key': String(process.env.NEXT_PUBLIC_X_API_KEY),
       },
       ...(options ? options : {}),
     });

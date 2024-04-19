@@ -1,7 +1,12 @@
-'use client';
+import CoursesPage from '@/components/Courses';
 
-const Page = () => {
-  return <>Course page</>;
+interface IPage {
+  searchParams: {
+    [key: string]: string;
+  };
+}
+const Page = ({ searchParams }: IPage) => {
+  return <CoursesPage searchParams={searchParams} />;
 };
 
 export default Page;
