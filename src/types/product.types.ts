@@ -2,6 +2,22 @@ import { IImage } from '.';
 import { IDoc } from './doc.types';
 import { IProductTag } from './productTags.types';
 
+export enum Currency {
+  USD = 'USD',
+  GBP = 'GBP',
+  EUR = 'EUR',
+}
+
+export enum DiscountType {
+  percent = 'percent',
+  fixed = 'fixed',
+}
+
+export enum DiscountRuleType {
+  count = 'count',
+  amount = 'amount',
+}
+
 export interface IVenue extends IDoc {
   id: string;
   address: string;
@@ -12,10 +28,10 @@ export interface IVenue extends IDoc {
 }
 
 export interface IDiscount {
-  type: string;
-  amount: number;
-  rule_type: string;
-  rule_amount: number;
+  type?: DiscountType;
+  amount?: number;
+  rule_type?: DiscountRuleType;
+  rule_amount?: number;
 }
 
 export interface IProductItem {
@@ -33,7 +49,7 @@ export interface IProduct extends IDoc {
   description1: string;
   description2: string;
   venue: IVenue;
-  currency: string;
+  currency: Currency;
   discount: IDiscount;
   items: IProductItem[];
   slug: string;

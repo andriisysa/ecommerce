@@ -23,9 +23,15 @@ interface IProductSearchProps {
   form: IForm;
   setForm: Dispatch<SetStateAction<IForm>>;
   onSearch: fType;
+  isSearching?: boolean;
 }
 
-const ProductSearch = ({ form, setForm, onSearch }: IProductSearchProps) => {
+const ProductSearch = ({
+  form,
+  setForm,
+  onSearch,
+  isSearching,
+}: IProductSearchProps) => {
   const { data: courseData, isLoading: isCourseLoading } = useGetCoursesQuery();
   const { data: datesData, isLoading: isDatesLoading } = useGetDatesQuery();
   const { data: locationsData, isLoading: isLocationsLoading } =
@@ -111,6 +117,7 @@ const ProductSearch = ({ form, setForm, onSearch }: IProductSearchProps) => {
         text="Find Course"
         classes={{ root: styles.btnRoot }}
         onClick={onSearch}
+        loading={isSearching}
       />
     </div>
   );

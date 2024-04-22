@@ -13,3 +13,9 @@ export const capitalize = (value: string): string => {
     .join(' ')
     .trim();
 };
+
+export const numberToCurrency = (currency: string) =>
+  Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+  });

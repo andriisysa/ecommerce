@@ -24,7 +24,8 @@ const CoursesPage = ({ searchParams }: IProps) => {
     ageRange: searchParams.ageRange,
   });
 
-  const [getProducts, { data, isLoading }] = useLazyGetProductsQuery();
+  const [getProducts, { data, isLoading, isFetching }] =
+    useLazyGetProductsQuery();
 
   useEffect(() => {
     getProducts({
@@ -45,12 +46,18 @@ const CoursesPage = ({ searchParams }: IProps) => {
   };
 
   const products = useMemo(() => data?.docs || [], [data]);
+  const loading = isLoading || isFetching;
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <h1>All Classes</h1>
-        <ProductSearch form={form} setForm={setForm} onSearch={onSearch} />
+        <ProductSearch
+          form={form}
+          setForm={setForm}
+          onSearch={onSearch}
+          isSearching={loading}
+        />
 
         <Card classes={{ wrapper: styles.courseList }}>
           <div className={styles.courseContent}>
