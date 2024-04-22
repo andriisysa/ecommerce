@@ -38,10 +38,6 @@ const Select = (props: ISelectProps) => {
     };
   }, []);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    if (onChange) onChange(event.target.value);
-  };
-
   return (
     <NoSsr>
       <div className={styles.component}>
@@ -58,7 +54,6 @@ const Select = (props: ISelectProps) => {
             setIsOpen(false);
           }}
           value={value || ''}
-          onChange={handleChange}
           input={
             <OutlinedInput
               classes={{
@@ -91,7 +86,15 @@ const Select = (props: ISelectProps) => {
           disabled={disabled}
         >
           {(items || []).map((item, key) => (
-            <MenuItem key={key} value={item.value}>
+            <MenuItem
+              key={key}
+              value={item.value}
+              onClick={() => {
+                if (onChange) {
+                  onChange(value === item.value ? '' : item.value);
+                }
+              }}
+            >
               {item.label}
             </MenuItem>
           ))}

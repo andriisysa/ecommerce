@@ -1,7 +1,5 @@
-import { Doc } from './doc.types';
-
 export interface IPagination<T> {
-  docs: Doc<T>[];
+  docs: T[];
   totalDocs: number;
   limit: number;
   totalPages: number;

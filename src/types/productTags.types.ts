@@ -1,4 +1,5 @@
-export interface IProductTag {
-  id: string;
+import { IDoc } from './doc.types';
+
+export interface IProductTag extends IDoc {
   name: string;
 }

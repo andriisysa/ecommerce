@@ -8,7 +8,7 @@ import {
   useGetCoursesQuery,
   useGetDatesQuery,
   useGetLocationsQuery,
-} from '@/redux/apis/productTags';
+} from '@/redux/apis/productTagsApi';
 
 import styles from './styles.module.scss';
 
