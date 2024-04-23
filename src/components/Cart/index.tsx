@@ -1,10 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import { Divider } from '@mui/material';
 
 import useGetCartProducts from '@/hooks/useGetCartProducts';
 import { numberToCurrency } from '@/utils';
+import { PAGE_CHECKOUT, PAGE_COURSES } from '@/routes';
 
 import Button from '../common/Button';
 import Card from '../common/Card';
@@ -31,7 +33,10 @@ const CartPage = () => {
       <div className={styles.content}>
         {cartItemCount === 0 ? (
           <div className={styles.emptyCart}>
-            <h2>Your cart is empty</h2>
+            <h2>
+              Your cart is empty.
+              <Link href={PAGE_COURSES}>Explore courses?</Link>
+            </h2>
           </div>
         ) : (
           <div className={styles.cartContent}>
@@ -77,7 +82,10 @@ const CartPage = () => {
                     {currency && numberToCurrency(currency).format(totalPrice)}
                   </span>
                 </div>
-                <Button text="Proceed Checkout" />
+
+                <Link href={PAGE_CHECKOUT}>
+                  <Button text="Proceed Checkout" stopPropagation={false} />
+                </Link>
               </Card>
             </div>
           </div>

@@ -66,6 +66,10 @@ export const appSlice = createSlice({
       );
       window.localStorage.setItem(cartKey, JSON.stringify(state.cartProducts));
     },
+    clearCart: (state) => {
+      state.cartProducts = [];
+      window.localStorage.removeItem(cartKey);
+    },
   },
 });
 
@@ -74,6 +78,7 @@ export const {
   setCartProducts,
   addToCart,
   removeProductFromCart,
+  clearCart,
 } = appSlice.actions;
 
 export default appSlice.reducer;

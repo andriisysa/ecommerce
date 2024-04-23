@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import {
+  PAGE_CART,
   PAGE_CONTACT,
   PAGE_COURSES,
   PAGE_FAQS,
   PAGE_HOME,
-  PAGE_LOCATIONS,
 } from '@/routes';
 
 import logoPublic from '~/img/logo-public.png';
@@ -33,11 +33,11 @@ const Footer = () => {
                 <Link href={PAGE_COURSES}>
                   <span>Courses</span>
                 </Link>
-                <Link href={PAGE_LOCATIONS}>
-                  <span>Locations</span>
-                </Link>
                 <Link href={PAGE_FAQS}>
                   <span>FAQs</span>
+                </Link>
+                <Link href={PAGE_CART}>
+                  <span>Cart</span>
                 </Link>
                 <Link href={PAGE_CONTACT}>
                   <span>Contact</span>
