@@ -57,10 +57,23 @@ export const appSlice = createSlice({
 
       window.localStorage.setItem(cartKey, JSON.stringify(state.cartProducts));
     },
+    removeProductFromCart: (
+      state,
+      { payload }: PayloadAction<ICartProduct>
+    ) => {
+      state.cartProducts = state.cartProducts.filter(
+        (p) => p.id !== payload.id
+      );
+      window.localStorage.setItem(cartKey, JSON.stringify(state.cartProducts));
+    },
   },
 });
 
-export const { loadCartProducts, setCartProducts, addToCart } =
-  appSlice.actions;
+export const {
+  loadCartProducts,
+  setCartProducts,
+  addToCart,
+  removeProductFromCart,
+} = appSlice.actions;
 
 export default appSlice.reducer;

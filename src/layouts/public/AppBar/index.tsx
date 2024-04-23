@@ -1,20 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { Route } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton } from '@mui/material';
+import { Badge, IconButton } from '@mui/material';
 import cn from 'classnames';
 import { useDispatch } from 'react-redux';
 
-import Button from '@/components/common/Button';
+import useGetCartProducts from '@/hooks/useGetCartProducts';
 import { loadCartProducts } from '@/redux/slices/app';
 import {
+  PAGE_CART,
   PAGE_CONTACT,
   PAGE_COURSES,
   PAGE_FAQS,
   PAGE_HOME,
-  PAGE_LOCATIONS,
 } from '@/routes';
 
 import logoPublicWhite from '~/img/logo-public-white.png';
@@ -31,6 +32,7 @@ const AppBar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const dispatch = useDispatch();
+  const { cartItemCount } = useGetCartProducts();
 
   const mobileMenuRef = useRef<HTMLButtonElement>(null);
 
@@ -56,10 +58,6 @@ const AppBar = () => {
     if (path) push(path);
   };
 
-  const goToPage = (path?: Route) => {
-    if (path) push(path);
-  };
-
   return (
     <>
       <div
@@ -82,55 +80,38 @@ const AppBar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <div className={styles.logo} onClick={() => goToPage(PAGE_HOME)}>
-              <Image
-                src={isHomepage && !scrolled ? logoPublicWhite : logoPublic}
-                fill
-                sizes="10vw"
-                alt=""
-              />
-            </div>
+            <Link href={PAGE_HOME}>
+              <div className={styles.logo}>
+                <Image
+                  src={isHomepage && !scrolled ? logoPublicWhite : logoPublic}
+                  fill
+                  sizes="10vw"
+                  alt=""
+                />
+              </div>
+            </Link>
           </div>
 
           <div className={styles.menuWrapper}>
-            <Button
-              classes={{
-                root: cn(styles.btnMenu),
-              }}
-              isChild
-              disableRipple
-              clean
-              text="Courses"
-              stopPropagation={false}
-              onClick={() => goToPage(PAGE_COURSES)}
-            />
-            <Button
-              classes={{ root: styles.btnMenu }}
-              isChild
-              clean
-              disableRipple
-              text="Locations"
-              stopPropagation={false}
-              onClick={() => goToPage(PAGE_LOCATIONS)}
-            />
-            <Button
-              classes={{ root: styles.btnMenu }}
-              isChild
-              clean
-              disableRipple
-              text="FAQs"
-              stopPropagation={false}
-              onClick={() => goToPage(PAGE_FAQS)}
-            />
-            <Button
-              classes={{ root: styles.btnMenu }}
-              isChild
-              clean
-              disableRipple
-              text="Contact"
-              stopPropagation={false}
-              onClick={() => goToPage(PAGE_CONTACT)}
-            />
+            <Link href={PAGE_COURSES}>
+              <span className={styles.btnMenu}>Courses</span>
+            </Link>
+            <Link href={PAGE_FAQS}>
+              <span className={styles.btnMenu}>FAQs</span>
+            </Link>
+            <Link href={PAGE_CART}>
+              <span className={styles.btnMenu}>
+                Cart
+                {cartItemCount > 0 && (
+                  <Badge badgeContent={cartItemCount} color="secondary">
+                    <span style={{ width: 10, height: 5 }} />
+                  </Badge>
+                )}
+              </span>
+            </Link>
+            <Link href={PAGE_CONTACT}>
+              <span className={styles.btnMenu}>Contact</span>
+            </Link>
           </div>
         </div>
         <MobileMenu

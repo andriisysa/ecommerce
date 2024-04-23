@@ -41,15 +41,13 @@ const Accordion = (props: IAccordionProps) => {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography
-            classes={{
-              root: cn(styles.titleRoot, titleRoot, {
-                [styles.active]: expanded,
-              }),
-            }}
+          <div
+            className={cn(styles.titleRoot, titleRoot, {
+              [styles.active]: expanded,
+            })}
           >
             {title}
-          </Typography>
+          </div>
         </AccordionSummary>
         <AccordionDetails
           classes={{

@@ -196,7 +196,7 @@
   background: rgba(0, 0, 0, 0);
 
   & > .container {
-    & > .menuWrapper > .btnMenu {
+    & > .menuWrapper > a > .btnMenu {
       color: $white;
 
       &.active {

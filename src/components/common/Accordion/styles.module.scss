@@ -42,6 +42,7 @@
   margin: 0;
   @include h5;
   color: $black;
+  width: 100%;
 
   &.active {
     color: $green;
