@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Divider,
@@ -13,21 +14,28 @@ import {
 } from '@mui/material';
 import cn from 'classnames';
 import { format } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   DiscountRuleType,
   DiscountType,
+  ICartItem,
   IProduct,
+  IProductItem,
 } from '@/types/product.types';
+import { addToCart, cartAvailableDiffHours } from '@/redux/slices/app';
+import { RootState } from '@/redux/store';
 import { numberToCurrency } from '@/utils';
 import { diffFromNow } from '@/utils/date';
 
 import Button from '../common/Button';
+import Counter from '../common/Counter';
 import styles from './styles.module.scss';
 
 interface IProps {
   product: IProduct;
 }
+
 const CoursePage = ({ product }: IProps) => {
   const {
     image,
@@ -39,6 +47,32 @@ const CoursePage = ({ product }: IProps) => {
     items,
     venue,
   } = product;
+
+  const dispatch = useDispatch();
+
+  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+
+  const cartProducts = useSelector(
+    (state: RootState) => state.app.cartProducts
+  );
+
+  useEffect(() => {
+    const cartProduct = cartProducts.find((cp) => cp.id === product.id);
+    if (cartProduct) {
+      setCartItems(cartProduct.items);
+    }
+  }, [cartProducts, setCartItems]);
+
+  const onCartItemChange = (item: IProductItem, count: number) => {
+    setCartItems((prev) => [
+      ...prev.filter((ci) => ci.id !== item.id),
+      ...(count > 0 ? [{ ...item, count }] : []),
+    ]);
+  };
+
+  const onAddToCart = () => {
+    dispatch(addToCart({ ...product, items: cartItems }));
+  };
 
   return (
     <div className={styles.container}>
@@ -89,7 +123,8 @@ const CoursePage = ({ product }: IProps) => {
                       key={id}
                       className={cn({
                         [styles.textThrough]:
-                          diffFromNow(from) < 5 || stoke < 1,
+                          diffFromNow(from) < cartAvailableDiffHours ||
+                          stoke < 1,
                       })}
                     >
                       <TableCell>{new Date(from).toDateString()}</TableCell>
@@ -139,20 +174,53 @@ const CoursePage = ({ product }: IProps) => {
                 ) : undefined}
               </Stack>
             </NoSsr>
+            <h4>Product Items</h4>
+            {discount.amount && discount.rule_amount && (
+              <span className={styles.discount}>
+                You can get{' '}
+                {discount.type === DiscountType.fixed
+                  ? numberToCurrency(currency).format(discount.amount)
+                  : `${discount.amount}%`}{' '}
+                discount if you purchase more than{' '}
+                {discount.rule_type === DiscountRuleType.amount
+                  ? numberToCurrency(currency).format(discount.rule_amount)
+                  : `${discount.rule_amount} products`}
+              </span>
+            )}
             <div className={styles.items}>
-              {items.map(({ id, name, from, price, stoke }) => (
-                <div key={id} className={styles.item}>
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className={cn(styles.item, {
+                    [styles.textThrough]:
+                      diffFromNow(item.from) < cartAvailableDiffHours,
+                  })}
+                >
                   <div className={styles.counterWrapper}>
-                    <span>
-                      {format(new Date(from), 'EEEE')} - {name}
+                    <Counter
+                      value={
+                        cartItems.find((ci) => ci.id === item.id)?.count || 0
+                      }
+                      min={0}
+                      max={
+                        diffFromNow(item.from) < cartAvailableDiffHours
+                          ? 0
+                          : item.stoke
+                      }
+                      onChange={(count: number) =>
+                        onCartItemChange(item, count)
+                      }
+                    />
+                    <span className={styles.itemDescription}>
+                      {format(new Date(item.from), 'EEEE')} - {item.name}
                     </span>
                   </div>
-                  <span>{`${stoke} in stoke`}</span>
-                  <span>{numberToCurrency(currency).format(price)}</span>
+                  <span>{`${item.stoke} in stoke`}</span>
+                  <span>{numberToCurrency(currency).format(item.price)}</span>
                 </div>
               ))}
             </div>
-            <Button text="Book Now" />
+            <Button text="Add To Cart" onClick={onAddToCart} />
           </div>
         </div>
       </div>

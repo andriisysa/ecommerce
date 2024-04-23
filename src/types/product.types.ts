@@ -60,3 +60,12 @@ export interface IProduct extends IDoc {
   tag?: IProductTag;
   date?: IProductTag;
 }
+
+export interface ICartItem extends IProductItem {
+  count: number;
+}
+export interface ICartProduct extends IProduct {
+  id: string;
+  name: string;
+  items: ICartItem[];
+}

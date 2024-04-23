@@ -5,8 +5,10 @@ import { usePathname, useRouter } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton } from '@mui/material';
 import cn from 'classnames';
+import { useDispatch } from 'react-redux';
 
 import Button from '@/components/common/Button';
+import { loadCartProducts } from '@/redux/slices/app';
 import {
   PAGE_CONTACT,
   PAGE_COURSES,
@@ -28,6 +30,8 @@ const AppBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const dispatch = useDispatch();
+
   const mobileMenuRef = useRef<HTMLButtonElement>(null);
 
   const isHomepage = pathName === PAGE_HOME;
@@ -39,6 +43,8 @@ const AppBar = () => {
   useEffect(() => {
     handleScroll();
     window.addEventListener('scroll', handleScroll);
+
+    dispatch(loadCartProducts());
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
