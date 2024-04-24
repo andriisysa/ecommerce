@@ -144,10 +144,8 @@ const UserForm = ({ userData, setUserData, errors, clearErrors }: IProps) => {
           </div>
           <ReactFlagsSelect
             selected={userData.country}
-            onSelect={(code) => {
-              console.log(code);
-              onChange('country', code);
-            }}
+            onSelect={(code) => onChange('country', code)}
+            searchable
           />
           {errors.country && (
             <span className={styles.error}>{errors.country}</span>

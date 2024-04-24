@@ -123,7 +123,7 @@ const CheckoutForm = ({
                 stripe={stripePromise}
                 options={{
                   mode: 'payment',
-                  amount: totalPrice,
+                  amount: totalPrice * 100,
                   currency: currency?.toLowerCase(),
                   appearance: { theme: 'stripe' },
                 }}
