@@ -76,11 +76,6 @@
   flex-direction: column;
   padding: 0 20px;
 
-  h5 {
-    @include h5;
-    margin: 20px 0 0 0;
-  }
-
   .items {
     margin-top: 20px;
     width: 100%;
@@ -105,7 +100,7 @@
       }
 
       .description {
-        width: 600px;
+        width: 300px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -137,7 +132,5 @@
     @include body;
     color: $black;
     font-weight: bold;
-
-    padding: 0 40px 0 20px;
   }
 }

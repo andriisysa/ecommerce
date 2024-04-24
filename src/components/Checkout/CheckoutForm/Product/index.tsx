@@ -3,19 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { DeleteForever } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
 import { format } from 'date-fns';
-import { useDispatch } from 'react-redux';
 
 import Accordion from '@/components/common/Accordion';
-import Counter from '@/components/common/Counter';
-import {
-  DiscountRuleType,
-  DiscountType,
-  ICartProduct,
-} from '@/types/product.types';
-import { addToCart, removeProductFromCart } from '@/redux/slices/app';
+import { ICartProduct } from '@/types/product.types';
 import { numberToCurrency } from '@/utils';
 import { PAGE_COURSES } from '@/routes';
 
@@ -31,7 +22,7 @@ interface IProps {
   product: IProduct;
 }
 
-const CartProduct = ({ product }: IProps) => {
+const Product = ({ product }: IProps) => {
   const {
     name,
     slug,
@@ -44,8 +35,6 @@ const CartProduct = ({ product }: IProps) => {
   } = product;
 
   const { push } = useRouter();
-
-  const dispatch = useDispatch();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -84,16 +73,6 @@ const CartProduct = ({ product }: IProps) => {
                 )}
               </span>
             </div>
-            <IconButton
-              color="error"
-              onClick={(e) => {
-                if (e.stopPropagation) e.stopPropagation();
-
-                dispatch(removeProductFromCart(product));
-              }}
-            >
-              <DeleteForever />
-            </IconButton>
           </div>
         </div>
       }
@@ -101,18 +80,6 @@ const CartProduct = ({ product }: IProps) => {
       onChange={() => setExpanded((expanded) => !expanded)}
     >
       <div className={styles.details}>
-        {discount.amount && discount.rule_amount && (
-          <h5>
-            You can get{' '}
-            {discount.type === DiscountType.fixed
-              ? numberToCurrency(currency).format(discount.amount)
-              : `${discount.amount}%`}{' '}
-            discount if you purchase more than{' '}
-            {discount.rule_type === DiscountRuleType.amount
-              ? numberToCurrency(currency).format(discount.rule_amount)
-              : `${discount.rule_amount} products`}
-          </h5>
-        )}
         <div className={styles.items}>
           {items.map((item) => (
             <div key={item.id} className={styles.item}>
@@ -122,41 +89,10 @@ const CartProduct = ({ product }: IProps) => {
               <div className={styles.description}>
                 <span>{numberToCurrency(currency).format(item.price)}</span>
                 <span> x </span>
-                <div className={styles.counterWrapper}>
-                  <Counter
-                    value={item.count || 0}
-                    min={1}
-                    max={item.stoke}
-                    onChange={(count: number) => {
-                      dispatch(
-                        addToCart({
-                          ...product,
-                          items: items.map((i) =>
-                            i.id === item.id ? { ...item, count } : i
-                          ),
-                        })
-                      );
-                    }}
-                  />
-                </div>
+                <span>{item.count}</span>
                 <span>
                   {numberToCurrency(currency).format(item.price * item.count)}
                 </span>
-                <IconButton
-                  color="error"
-                  onClick={(e) => {
-                    if (e.stopPropagation) e.stopPropagation();
-
-                    dispatch(
-                      addToCart({
-                        ...product,
-                        items: items.filter((i) => i.id !== item.id),
-                      })
-                    );
-                  }}
-                >
-                  <DeleteForever />
-                </IconButton>
               </div>
             </div>
           ))}
@@ -172,4 +108,4 @@ const CartProduct = ({ product }: IProps) => {
   );
 };
 
-export default CartProduct;
+export default Product;

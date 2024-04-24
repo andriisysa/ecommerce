@@ -1,8 +1,10 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
+import ReactFlagsSelect from 'react-flags-select';
 
 import OutlinedInput from '@/components/common/OutLinedInput';
+import { fType } from '@/types';
 
 import styles from './styles.module.scss';
 
@@ -41,10 +43,12 @@ interface IProps {
   userData: IUserData;
   setUserData: Dispatch<SetStateAction<IUserData>>;
   errors: IUserDataError;
+  clearErrors: fType;
 }
 
-const UserForm = ({ userData, setUserData, errors }: IProps) => {
+const UserForm = ({ userData, setUserData, errors, clearErrors }: IProps) => {
   const onChange = (name: keyof IUserData, value: string) => {
+    clearErrors({});
     setUserData((data) => ({ ...data, [name]: value }));
   };
 
@@ -138,14 +142,16 @@ const UserForm = ({ userData, setUserData, errors }: IProps) => {
           <div className={styles.label}>
             <label htmlFor="country">Country *</label>
           </div>
-          <OutlinedInput
-            name="country"
-            value={userData.country}
-            type="text"
-            placeholder="Country"
-            onChange={onChange}
-            error={errors?.country}
+          <ReactFlagsSelect
+            selected={userData.country}
+            onSelect={(code) => {
+              console.log(code);
+              onChange('country', code);
+            }}
           />
+          {errors.country && (
+            <span className={styles.error}>{errors.country}</span>
+          )}
         </div>
         <div className={styles.inputsection}>
           <div className={styles.label}>
@@ -172,6 +178,19 @@ const UserForm = ({ userData, setUserData, errors }: IProps) => {
           placeholder="email@example.com"
           onChange={onChange}
           error={errors?.email}
+        />
+      </div>
+      <div className={styles.inputsection}>
+        <div className={styles.label}>
+          <label htmlFor="phone">Phone Number *</label>
+        </div>
+        <OutlinedInput
+          name="phone"
+          value={userData.phone}
+          type="text"
+          placeholder=""
+          onChange={onChange}
+          error={errors?.phone}
         />
       </div>
       <div className={styles.inputsection}>
@@ -209,6 +228,18 @@ const UserForm = ({ userData, setUserData, errors }: IProps) => {
         <OutlinedInput
           name="experience"
           value={userData.experience}
+          type="text"
+          onChange={onChange}
+          multiline
+        />
+      </div>
+      <div className={styles.inputsection}>
+        <div className={styles.label}>
+          <label htmlFor="orderNote">Order Note?</label>
+        </div>
+        <OutlinedInput
+          name="orderNote"
+          value={userData.orderNote}
           type="text"
           onChange={onChange}
           multiline

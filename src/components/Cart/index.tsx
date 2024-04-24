@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Divider } from '@mui/material';
 
 import useGetCartProducts from '@/hooks/useGetCartProducts';
 import { numberToCurrency } from '@/utils';
