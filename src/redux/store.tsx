@@ -6,7 +6,6 @@ import {
   type TypedUseSelectorHook,
 } from 'react-redux';
 
-import { ordersApi } from './apis/ordersApi';
 import { productsApi } from './apis/productsApi';
 import { productTagsApi } from './apis/productTagsApi';
 import appReducer from './slices/app';
@@ -16,16 +15,11 @@ export const store = configureStore({
     app: appReducer,
     [productTagsApi.reducerPath]: productTagsApi.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
-    [ordersApi.reducerPath]: ordersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(
-      productTagsApi.middleware,
-      productsApi.middleware,
-      ordersApi.middleware
-    ),
+    }).concat(productTagsApi.middleware, productsApi.middleware),
 });
 
 setupListeners(store.dispatch);

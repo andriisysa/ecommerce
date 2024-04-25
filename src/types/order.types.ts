@@ -1,4 +1,6 @@
+import { ICustomer } from './customer.types';
 import { IDoc } from './doc.types';
+import { ICartProduct } from './product.types';
 
 export enum PaymentGateway {
   stripe = 'stripe',
@@ -12,17 +14,33 @@ export enum OrderStatusType {
   refunded = 'Refunded',
 }
 
-export interface IOder extends IDoc {
+export interface IOrder extends IDoc {
   id: string;
   orderId: string;
   status: OrderStatusType;
   paymentGateway: PaymentGateway;
   totalPrice: number;
   refundAmount: number;
-  details: any;
+  details: {
+    orderId: string;
+    totalPrice: number;
+    couponDiscount: number;
+    products: ICartProduct[];
+    paymentGateway: PaymentGateway;
+    customer: ICustomer;
+  };
   orderDate: string;
   attendeeName: string;
   attendeeAge: string;
   experience: string;
-  paymentIntentId: string;
+  paymentIntentId?: string;
+  customer: ICustomer;
+}
+
+export interface IOtherPaymentMethod {
+  id: string;
+  name: string;
+  bank?: string;
+  accountNumber: string;
+  sortCode?: string;
 }

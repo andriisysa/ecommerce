@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Divider,
   NoSsr,
@@ -20,48 +21,43 @@ import {
   DiscountRuleType,
   DiscountType,
   ICartItem,
-  IProduct,
   IProductItem,
 } from '@/types/product.types';
+import { useGetProductQuery } from '@/redux/apis/productsApi';
 import { addToCart, cartAvailableDiffHours } from '@/redux/slices/app';
 import { RootState } from '@/redux/store';
 import { numberToCurrency } from '@/utils';
 import { diffFromNow } from '@/utils/date';
+import { PAGE_COURSES } from '@/routes';
 
 import Button from '../common/Button';
 import Counter from '../common/Counter';
+import Preloader from '../common/Preloader';
 import styles from './styles.module.scss';
 
 interface IProps {
-  product: IProduct;
+  slug: string;
 }
 
-const CoursePage = ({ product }: IProps) => {
-  const {
-    image,
-    name,
-    description1,
-    description2,
-    discount,
-    currency,
-    items,
-    venue,
-  } = product;
-
+const CoursePage = ({ slug }: IProps) => {
   const dispatch = useDispatch();
 
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+
+  const { data: product, isLoading } = useGetProductQuery({ slug });
 
   const cartProducts = useSelector(
     (state: RootState) => state.app.cartProducts
   );
 
   useEffect(() => {
-    const cartProduct = cartProducts.find((cp) => cp.id === product.id);
-    if (cartProduct) {
-      setCartItems(cartProduct.items);
+    if (product) {
+      const cartProduct = cartProducts.find((cp) => cp.id === product.id);
+      if (cartProduct) {
+        setCartItems(cartProduct.items);
+      }
     }
-  }, [cartProducts, setCartItems]);
+  }, [product, cartProducts, setCartItems]);
 
   const onCartItemChange = (item: IProductItem, count: number) => {
     setCartItems((prev) => [
@@ -71,8 +67,38 @@ const CoursePage = ({ product }: IProps) => {
   };
 
   const onAddToCart = () => {
-    dispatch(addToCart({ ...product, items: cartItems }));
+    if (product) dispatch(addToCart({ ...product, items: cartItems }));
   };
+
+  if (isLoading) {
+    return <Preloader />;
+  }
+
+  if (!product) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.notfound}>
+            <h2>
+              Not found Course.
+              <Link href={PAGE_COURSES}>Explore courses?</Link>
+            </h2>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const {
+    name,
+    image,
+    description1,
+    description2,
+    discount,
+    items,
+    currency,
+    venue,
+  } = product;
 
   return (
     <div className={styles.container}>

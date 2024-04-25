@@ -31,6 +31,24 @@
   }
 }
 
+.notfound {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  h2 {
+    @include h2;
+    text-align: center;
+    color: $dark;
+
+    a {
+      text-decoration: underline;
+      color: $green;
+      margin-left: 10px;
+    }
+  }
+}
+
 .productContent {
   width: 100%;
   display: flex;

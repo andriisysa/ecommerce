@@ -2,30 +2,30 @@
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowBack } from '@mui/icons-material';
 import { FormHelperText } from '@mui/material';
 import cn from 'classnames';
 import { useDispatch } from 'react-redux';
 
 import useGetCartProducts from '@/hooks/useGetCartProducts';
-import { IResponseError } from '@/types/error.types';
 import { PaymentGateway } from '@/types/order.types';
-import { useStripeCheckoutMutation } from '@/redux/apis/ordersApi';
+import {
+  useOtherCheckoutMutation,
+  useStripeCheckoutMutation,
+} from '@/redux/apis/productsApi';
 import { clearCart } from '@/redux/slices/app';
 import { isEmail, isRequired } from '@/utils/validate';
-import { PAGE_COURSES } from '@/routes';
+import { PAGE_COURSES, PAGE_ORDERS } from '@/routes';
 
 import Button from '../common/Button';
-import CheckoutDone, { PaymentStatus } from './CheckoutDone';
 import CheckoutForm, { IStripeRefObject } from './CheckoutForm';
 import styles from './styles.module.scss';
 import UserForm, { IUserData, IUserDataError } from './UserForm';
 
-interface IProps {
-  payment_intent_client_secret?: string;
-}
+const CheckoutPage = () => {
+  const { push } = useRouter();
 
-const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
   const [step, setStep] = useState(1);
 
   const [userData, setUserData] = useState<IUserData>({
@@ -48,9 +48,6 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
   const [userDataErrors, setUserDataErrors] = useState<IUserDataError>({});
   const [isLoading, setIsLoading] = useState(false);
   const [paymentGateway, setPaymentGateway] = useState(PaymentGateway.stripe);
-  const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | undefined>(
-    undefined
-  );
   const [requestError, setRequestError] = useState('');
 
   const checkoutRef = useRef<IStripeRefObject>({
@@ -62,9 +59,9 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
 
   const { cartProducts, cartItemCount } = useGetCartProducts();
   const [stripeCheckout] = useStripeCheckoutMutation();
+  const [otherCheckout] = useOtherCheckoutMutation();
 
   const isFirstStep = () => step === 1;
-  const isLastStep = () => step == 3;
 
   const prevStep = () => {
     if (isFirstStep()) return;
@@ -77,8 +74,12 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
       return;
     }
 
+    if (step === 1) {
+      setStep(step + 1);
+      return;
+    }
+
     if (step === 2) {
-      setIsLoading(true);
       setRequestError('');
 
       if (paymentGateway === PaymentGateway.stripe) {
@@ -87,15 +88,15 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
         const stripe = checkoutRef.current.stripe;
 
         if (!elements || !stripe) {
-          setIsLoading(false);
           return;
         }
 
         const { error: submitError } = await elements.submit();
         if (submitError) {
-          setIsLoading(false);
           return;
         }
+
+        setIsLoading(true);
 
         try {
           const data = await stripeCheckout({
@@ -123,47 +124,52 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
           switch (paymentIntent?.status) {
             case 'succeeded':
               dispatch(clearCart());
-              setPaymentStatus(PaymentStatus.succeeded);
-              break;
+              push(`${PAGE_ORDERS}/${data.order.id}`);
+              return;
 
             case 'processing':
               dispatch(clearCart());
-              setPaymentStatus(PaymentStatus.processing);
+              push(`${PAGE_ORDERS}/${data.order.id}`);
               break;
 
             case 'requires_payment_method':
-              setIsLoading(false);
               setRequestError(
                 'Payment failed. Please try another payment method.'
               );
-              return;
+              break;
 
             default:
               setRequestError('Something went wrong.');
-              setIsLoading(false);
-              return;
+              break;
           }
         } catch (error: any) {
-          console.log('error ===>', error);
           const errorMsg = error.data
             ? error.data.errors[0].message
             : error.message;
           setRequestError(errorMsg);
-          setIsLoading(false);
-          return;
         }
+
+        setIsLoading(false);
       } else {
         // other payment
+        setIsLoading(true);
+        try {
+          const { order } = await otherCheckout({
+            cartProducts,
+            userData,
+          }).unwrap();
+
+          dispatch(clearCart());
+          push(`${PAGE_ORDERS}/${order.id}`);
+        } catch (error: any) {
+          const errorMsg = error.data
+            ? error.data.errors[0].message
+            : error.message;
+          setRequestError(errorMsg);
+        }
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     }
-
-    if (step === 3) {
-      return;
-    }
-
-    setStep(step + 1);
   };
 
   const isValidate = () => {
@@ -191,7 +197,7 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
     }
   };
 
-  if (cartItemCount === 0 && step === 1) {
+  if (cartItemCount === 0) {
     return (
       <div className={styles.container}>
         <div className={styles.content}>
@@ -228,26 +234,16 @@ const CheckoutPage = ({ payment_intent_client_secret }: IProps) => {
           />
         )}
 
-        {step === 3 && paymentStatus && (
-          <CheckoutDone
-            paymentGateway={paymentGateway}
-            paymentStatus={paymentStatus}
-            userData={userData}
-          />
-        )}
-
         <div className={styles.actionGroup}>
           <Button
             classes={{
               root: cn(styles.finishBtn),
             }}
-            text={
-              isFirstStep() ? 'Continue' : isLastStep() ? 'Done' : 'Checkout'
-            }
+            text={isFirstStep() ? 'Continue' : 'Checkout'}
             onClick={nextStep}
             loading={isLoading}
           />
-          {!isFirstStep() && !isLastStep() && (
+          {!isFirstStep() && (
             <Button
               classes={{ root: styles.backBtn }}
               text="Back"
