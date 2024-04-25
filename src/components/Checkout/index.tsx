@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowBack } from '@mui/icons-material';
-import { FormHelperText } from '@mui/material';
 import cn from 'classnames';
+import { useSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux';
 
 import useGetCartProducts from '@/hooks/useGetCartProducts';
@@ -25,6 +25,7 @@ import UserForm, { IUserData, IUserDataError } from './UserForm';
 
 const CheckoutPage = () => {
   const { push } = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [step, setStep] = useState(1);
 
@@ -48,7 +49,6 @@ const CheckoutPage = () => {
   const [userDataErrors, setUserDataErrors] = useState<IUserDataError>({});
   const [isLoading, setIsLoading] = useState(false);
   const [paymentGateway, setPaymentGateway] = useState(PaymentGateway.stripe);
-  const [requestError, setRequestError] = useState('');
 
   const checkoutRef = useRef<IStripeRefObject>({
     elements: null,
@@ -80,8 +80,6 @@ const CheckoutPage = () => {
     }
 
     if (step === 2) {
-      setRequestError('');
-
       if (paymentGateway === PaymentGateway.stripe) {
         // stripe payment
         const elements = checkoutRef.current.elements;
@@ -116,57 +114,63 @@ const CheckoutPage = () => {
 
           if (error?.message) {
             console.log('stripe confirm error ===>', error);
-            setRequestError(error.message);
+            enqueueSnackbar(error.message, { variant: 'error' });
             setIsLoading(false);
             return;
           }
 
           switch (paymentIntent?.status) {
             case 'succeeded':
+              enqueueSnackbar('Order success', { variant: 'success' });
               dispatch(clearCart());
               push(`${PAGE_ORDERS}/${data.order.id}`);
               return;
 
             case 'processing':
+              enqueueSnackbar('Order success', { variant: 'success' });
               dispatch(clearCart());
               push(`${PAGE_ORDERS}/${data.order.id}`);
               break;
 
             case 'requires_payment_method':
-              setRequestError(
-                'Payment failed. Please try another payment method.'
+              enqueueSnackbar(
+                'Payment failed. Please try another payment method.',
+                { variant: 'error' }
               );
               break;
 
             default:
-              setRequestError('Something went wrong.');
+              enqueueSnackbar('Something went wrong.', { variant: 'error' });
               break;
           }
         } catch (error: any) {
           const errorMsg = error.data
             ? error.data.errors[0].message
             : error.message;
-          setRequestError(errorMsg);
+          enqueueSnackbar(errorMsg, { variant: 'error' });
         }
 
         setIsLoading(false);
       } else {
         // other payment
         setIsLoading(true);
+
         try {
           const { order } = await otherCheckout({
             cartProducts,
             userData,
           }).unwrap();
 
+          enqueueSnackbar('Order success', { variant: 'success' });
           dispatch(clearCart());
           push(`${PAGE_ORDERS}/${order.id}`);
         } catch (error: any) {
           const errorMsg = error.data
             ? error.data.errors[0].message
             : error.message;
-          setRequestError(errorMsg);
+          enqueueSnackbar(errorMsg, { variant: 'error' });
         }
+
         setIsLoading(false);
       }
     }
@@ -220,10 +224,7 @@ const CheckoutPage = () => {
             userData={userData}
             setUserData={setUserData}
             errors={userDataErrors}
-            clearErrors={() => {
-              setUserDataErrors({});
-              setRequestError('');
-            }}
+            clearErrors={() => setUserDataErrors({})}
           />
         )}
         {step === 2 && (
@@ -254,20 +255,6 @@ const CheckoutPage = () => {
             />
           )}
         </div>
-
-        {requestError ? (
-          <FormHelperText
-            error
-            sx={{
-              width: '100%',
-              textAlign: 'end',
-              pr: 2,
-              mt: 2,
-            }}
-          >
-            {requestError}
-          </FormHelperText>
-        ) : undefined}
       </div>
     </div>
   );

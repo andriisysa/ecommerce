@@ -8,8 +8,8 @@ import { useGetOrderQuery } from '@/redux/apis/productsApi';
 import { numberToCurrency } from '@/utils';
 import { PAGE_COURSES } from '@/routes';
 
+import Product from '../Checkout/CheckoutForm/Product';
 import Preloader from '../common/Preloader';
-import Product from './Product';
 import styles from './styles.module.scss';
 
 interface IProps {

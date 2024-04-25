@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import cn from 'classnames';
 import { format } from 'date-fns';
+import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -41,6 +42,7 @@ interface IProps {
 
 const CoursePage = ({ slug }: IProps) => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
 
@@ -67,7 +69,10 @@ const CoursePage = ({ slug }: IProps) => {
   };
 
   const onAddToCart = () => {
-    if (product) dispatch(addToCart({ ...product, items: cartItems }));
+    if (product) {
+      dispatch(addToCart({ ...product, items: cartItems }));
+      enqueueSnackbar('Course added to Cart!', { variant: 'success' });
+    }
   };
 
   if (isLoading) {
