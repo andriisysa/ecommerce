@@ -10,14 +10,10 @@
   align-items: center;
 
   .content {
-    width: 1240px;
-
-    @include breakpoint('max-lg') {
-      width: 100%;
-      padding: 0 60px;
-    }
+    width: 950px;
 
     @include breakpoint('max-md') {
+      width: 100%;
       padding: 0 40px;
     }
 
@@ -41,6 +37,156 @@
       text-decoration: underline;
       color: $green;
       margin-left: 10px;
+    }
+  }
+}
+
+.orderContent {
+  .orderDetails {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      @include h3;
+      margin: 0;
+      margin-bottom: 30px;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      @include body;
+
+      label {
+        margin-left: 10px;
+      }
+      span {
+        font-weight: bold;
+        color: gray;
+        margin-left: 20px;
+      }
+    }
+
+    .reference {
+      @include body;
+      margin-top: 10px;
+    }
+  }
+
+  .bankDetails {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      @include h3;
+      margin: 0 0 20px 0;
+    }
+
+    .details {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+
+      h4 {
+        @include h4;
+        margin: 0 0 15px 0;
+        font-weight: 500;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+
+        @include body;
+
+        label {
+          margin-left: 10px;
+        }
+        span {
+          font-weight: bold;
+          color: gray;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+
+  .customerDetails {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      @include h3;
+      margin: 20px 0;
+    }
+
+    .detail {
+      @include body;
+      margin-top: 5px;
+
+      span {
+        font-weight: bold;
+        color: gray;
+        margin-left: 20px;
+      }
+    }
+
+    h4 {
+      @include h4;
+      margin: 30px 0 20px 0;
+    }
+
+    span {
+      color: gray;
+      margin-bottom: 5px;
+    }
+  }
+
+  .orderTotal {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+
+    .details {
+      width: 60%;
+      padding: 0 20px;
+
+      @include breakpoint('max-sm') {
+        width: 100%;
+      }
+
+      .text {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+
+        label {
+          @include body;
+          color: gray;
+        }
+
+        span {
+          @include body;
+          color: $dark;
+        }
+      }
+
+      .divider {
+        flex: 1;
+        height: 1px;
+        background: $darkGrey;
+        margin-bottom: 20px;
+      }
     }
   }
 }
