@@ -24,10 +24,6 @@
     @include breakpoint('max-sm') {
       padding: 0 20px;
     }
-
-    @include breakpoint('max-sm') {
-      padding: 20px;
-    }
   }
 }
 

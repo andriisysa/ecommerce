@@ -1,0 +1,85 @@
+@import '@/styles/variables/breakpoint.scss';
+@import '@/styles/variables/color.scss';
+@import '@/styles/variables/typography.scss';
+
+.container {
+  width: 100%;
+  padding: 160px 0 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .content {
+    width: 1240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    h1 {
+      @include h1;
+      font-size: 48px;
+      color: $dark;
+      margin: 0 0 60px 0;
+    }
+
+    @include breakpoint('max-lg') {
+      width: 100%;
+      padding: 0 60px;
+    }
+
+    @include breakpoint('max-md') {
+      padding: 0 40px;
+    }
+
+    @include breakpoint('max-sm') {
+      padding: 0 20px;
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+
+    .help {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+}
+
+.cardWrapper {
+  padding: 40px;
+  // min-height: 410px;
+
+  @include breakpoint('max-lg') {
+    padding: 20px;
+  }
+
+  .cardTitleWrapper {
+    padding: 0;
+    margin-bottom: 20px;
+    height: 23px;
+
+    @include breakpoint('max-sm') {
+      height: auto;
+    }
+
+    .cardTitle {
+      @include h4;
+      color: $black;
+    }
+  }
+
+  .helpContainer {
+    width: 100%;
+    padding-top: 30px;
+    border-top: 1px solid $gray;
+
+    .tagListWrapper {
+      margin-bottom: 20px;
+    }
+  }
+}

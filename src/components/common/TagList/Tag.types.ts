@@ -8,7 +8,7 @@ export declare interface ITag {
 export interface ITagListProps extends IBaseUIProps {
   tags: ITag[];
   limit?: number;
-  selected: ITag;
+  selected?: ITag;
   loading?: boolean;
 }
 
