@@ -73,14 +73,24 @@
 }
 
 .cardWrapper {
-  padding: 0px;
+  padding: 0px !important;
   display: flex;
   flex-flow: column;
   // flex: 1; /* Shrink and grow according to available height */
   // flex-basis: 0;
+  position: relative;
 
   &.isActive {
     transition: all 2000ms;
+  }
+
+  .bookNowBtn {
+    width: 120px;
+    height: 40px;
+    position: absolute;
+    top: 200px;
+    right: 10px;
+    transform: translateY(-50%);
   }
 
   .image {

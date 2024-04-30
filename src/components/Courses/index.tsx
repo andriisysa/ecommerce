@@ -2,11 +2,13 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
+import { IProduct } from '@/types/product.types';
 import { useLazyGetProductsQuery } from '@/redux/apis/productsApi';
 import { PAGE_COURSES } from '@/routes';
 
 import Card from '../common/Card';
 import ProductSearch from '../Home/SearchSection/ProductSearch';
+import BookNowModal from './BookNowModal';
 import CourseItem from './CourseItem';
 import CourseLoadingItem from './CourseLoadingItem';
 import styles from './styles.module.scss';
@@ -23,6 +25,9 @@ const CoursesPage = ({ searchParams }: IProps) => {
     location: searchParams.location,
     ageRange: searchParams.ageRange,
   });
+  const [activeProduct, setActiveProduct] = useState<IProduct | undefined>(
+    undefined
+  );
 
   const [getProducts, { data, isLoading, isFetching }] =
     useLazyGetProductsQuery();
@@ -68,11 +73,13 @@ const CoursesPage = ({ searchParams }: IProps) => {
                     key={index}
                     product={product}
                     baseUrl={PAGE_COURSES}
+                    onClick={() => setActiveProduct(product)}
                   />
                 ))}
           </div>
         </Card>
       </div>
+      <BookNowModal product={activeProduct} setProduct={setActiveProduct} />
     </div>
   );
 };

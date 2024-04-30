@@ -1,8 +1,4 @@
-import { notFound } from 'next/navigation';
-
 import CoursePage from '@/components/Course';
-import { IProduct } from '@/types/product.types';
-import request from '@/utils/fetch';
 
 interface IPage {
   params: {
