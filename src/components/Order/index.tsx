@@ -137,13 +137,15 @@ const OrderPage = ({ otherPaymentMethods, id }: IProps) => {
                 <div className={styles.text}>
                   <label>Subtotal</label>
                   <span>
-                    {currency && numberToCurrency(currency).format(totalPrice)}
+                    {currency &&
+                      numberToCurrency(currency).format(details.totalPrice)}
                   </span>
                 </div>
                 <div className={styles.text}>
                   <label>Promo discount</label>
                   <span>
-                    {currency && numberToCurrency(currency).format(0)}
+                    {currency &&
+                      numberToCurrency(currency).format(details.couponDiscount)}
                   </span>
                 </div>
                 <div className={styles.divider} />

@@ -1,7 +1,13 @@
 import CheckoutPage from '@/components/Checkout';
 
-const Page = () => {
-  return <CheckoutPage />;
+interface IPage {
+  searchParams: {
+    [key: string]: string;
+  };
+}
+
+const Page = ({ searchParams }: IPage) => {
+  return <CheckoutPage couponCode={searchParams.couponCode} />;
 };
 
 export default Page;

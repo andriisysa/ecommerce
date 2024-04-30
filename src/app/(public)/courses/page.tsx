@@ -5,6 +5,7 @@ interface IPage {
     [key: string]: string;
   };
 }
+
 const Page = ({ searchParams }: IPage) => {
   return <CoursesPage searchParams={searchParams} />;
 };

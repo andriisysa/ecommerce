@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowBack } from '@mui/icons-material';
@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 
 import useGetCartProducts from '@/hooks/useGetCartProducts';
 import { PaymentGateway } from '@/types/order.types';
+import { useVerifyCouponMutation } from '@/redux/apis/couponApi';
 import {
   useOtherCheckoutMutation,
   useStripeCheckoutMutation,
@@ -23,7 +24,11 @@ import CheckoutForm, { IStripeRefObject } from './CheckoutForm';
 import styles from './styles.module.scss';
 import UserForm, { IUserData, IUserDataError } from './UserForm';
 
-const CheckoutPage = () => {
+interface IProps {
+  couponCode?: string;
+}
+
+const CheckoutPage = ({ couponCode }: IProps) => {
   const { push } = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -60,6 +65,13 @@ const CheckoutPage = () => {
   const { cartProducts, cartItemCount } = useGetCartProducts();
   const [stripeCheckout] = useStripeCheckoutMutation();
   const [otherCheckout] = useOtherCheckoutMutation();
+  const [verifyCoupon, { data: coupon }] = useVerifyCouponMutation();
+
+  useEffect(() => {
+    if (couponCode) {
+      verifyCoupon({ couponCode });
+    }
+  }, [couponCode]);
 
   const isFirstStep = () => step === 1;
 
@@ -100,6 +112,7 @@ const CheckoutPage = () => {
           const data = await stripeCheckout({
             cartProducts,
             userData,
+            couponCode: coupon?.code,
           }).unwrap();
 
           const { paymentIntent, error } = await stripe.confirmPayment({
@@ -159,6 +172,7 @@ const CheckoutPage = () => {
           const { order } = await otherCheckout({
             cartProducts,
             userData,
+            couponCode: coupon?.code,
           }).unwrap();
 
           enqueueSnackbar('Order success', { variant: 'success' });
@@ -232,6 +246,7 @@ const CheckoutPage = () => {
             paymentGateway={paymentGateway}
             setPaymentGateway={setPaymentGateway}
             checkoutRef={checkoutRef}
+            coupon={coupon}
           />
         )}
 

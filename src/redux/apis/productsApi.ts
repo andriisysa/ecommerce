@@ -18,6 +18,7 @@ interface IGetProductsRequest {
 interface ICheckoutRequest {
   cartProducts: ICartProduct[];
   userData: IUserData;
+  couponCode?: string;
 }
 
 export const productsApi = createApi({

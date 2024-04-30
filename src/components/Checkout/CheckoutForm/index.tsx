@@ -16,7 +16,9 @@ import {
 
 import useGetCartProducts from '@/hooks/useGetCartProducts';
 import Card from '@/components/common/Card';
+import { ICoupon } from '@/types/coupon.types';
 import { PaymentGateway } from '@/types/order.types';
+import { DiscountType } from '@/types/product.types';
 import { numberToCurrency } from '@/utils';
 
 import Product from './Product';
@@ -51,12 +53,14 @@ interface ICheckoutFormProps {
   paymentGateway: PaymentGateway;
   setPaymentGateway: Dispatch<SetStateAction<PaymentGateway>>;
   checkoutRef: RefObject<IStripeRefObject>;
+  coupon?: ICoupon;
 }
 
 const CheckoutForm = ({
   paymentGateway,
   setPaymentGateway,
   checkoutRef,
+  coupon,
 }: ICheckoutFormProps) => {
   const { cartProducts, currency } = useGetCartProducts();
 
@@ -67,6 +71,16 @@ const CheckoutForm = ({
         0
       ),
     [cartProducts]
+  );
+
+  const couponDiscount = useMemo(
+    () =>
+      coupon
+        ? coupon.discount.type === DiscountType.fixed
+          ? coupon.discount.amount
+          : (totalPrice * coupon.discount.amount) / 100
+        : 0,
+    [coupon, totalPrice]
   );
 
   return (
@@ -90,13 +104,18 @@ const CheckoutForm = ({
             </div>
             <div className={styles.text}>
               <label>Promo discount</label>
-              <span>{currency && numberToCurrency(currency).format(0)}</span>
+              <span>
+                {currency && numberToCurrency(currency).format(couponDiscount)}
+              </span>
             </div>
             <div className={styles.divider} />
             <div className={styles.text}>
               <label>Total</label>
               <span>
-                {currency && numberToCurrency(currency).format(totalPrice)}
+                {currency &&
+                  numberToCurrency(currency).format(
+                    totalPrice - couponDiscount
+                  )}
               </span>
             </div>
           </div>
