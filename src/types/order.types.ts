@@ -22,14 +22,14 @@ export interface IOrderProduct extends ICartProduct {
 
 export interface IOrder extends IDoc {
   id: string;
-  orderId: string;
+  orderNumber: string;
   status: OrderStatusType;
   paymentGateway: PaymentGateway;
   totalPrice: number;
   refundAmount: number;
   currency: Currency;
   details: {
-    orderId: string;
+    orderNumber: string;
     totalPrice: number;
     couponDiscount: number;
     products: IOrderProduct[];

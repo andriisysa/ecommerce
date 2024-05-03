@@ -40,7 +40,7 @@ const OrderPage = ({ otherPaymentMethods, id }: IProps) => {
   }
 
   const {
-    orderId,
+    orderNumber,
     orderDate,
     customer,
     totalPrice,
@@ -60,7 +60,7 @@ const OrderPage = ({ otherPaymentMethods, id }: IProps) => {
             <div className={styles.item}>
               <InfoRoundedIcon fontSize="small" />
               <label>Order Number:</label>
-              <span>{orderId}</span>
+              <span>{orderNumber}</span>
             </div>
             <div className={styles.item}>
               <InfoRoundedIcon fontSize="small" />

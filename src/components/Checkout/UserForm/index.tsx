@@ -5,6 +5,7 @@ import ReactFlagsSelect from 'react-flags-select';
 
 import OutlinedInput from '@/components/common/OutLinedInput';
 import { fType } from '@/types';
+import { countries } from '@/utils/countries';
 
 import styles from './styles.module.scss';
 
@@ -125,7 +126,7 @@ const UserForm = ({ userData, setUserData, errors, clearErrors }: IProps) => {
         </div>
         <div className={styles.inputsection}>
           <div className={styles.label}>
-            <label htmlFor="state">State *</label>
+            <label htmlFor="state">County / State *</label>
           </div>
           <OutlinedInput
             name="state"
@@ -145,6 +146,7 @@ const UserForm = ({ userData, setUserData, errors, clearErrors }: IProps) => {
           <ReactFlagsSelect
             selected={userData.country}
             onSelect={(code) => onChange('country', code)}
+            countries={Object.keys(countries)}
             searchable
           />
           {errors.country && (
