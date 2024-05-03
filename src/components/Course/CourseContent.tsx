@@ -111,12 +111,12 @@ const CourseContent = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map(({ id, from, to, name, stoke }) => (
+              {items.map(({ id, from, to, name, stock }) => (
                 <TableRow
                   key={id}
                   className={cn({
                     [styles.textThrough]:
-                      diffFromNow(from) < cartAvailableDiffHours || stoke < 1,
+                      diffFromNow(from) < cartAvailableDiffHours || stock < 1,
                   })}
                 >
                   <TableCell>{new Date(from).toDateString()}</TableCell>
@@ -195,7 +195,7 @@ const CourseContent = ({
                   max={
                     diffFromNow(item.from) < cartAvailableDiffHours
                       ? 0
-                      : item.stoke
+                      : item.stock
                   }
                   onChange={(count: number) =>
                     setCartItems((prev) => [
@@ -208,7 +208,7 @@ const CourseContent = ({
                   {format(new Date(item.from), 'EEEE')} - {item.name}
                 </span>
               </div>
-              <span>{`${item.stoke} in stoke`}</span>
+              <span>{`${item.stock} in stock`}</span>
               <span>{numberToCurrency(currency).format(item.price)}</span>
             </div>
           ))}

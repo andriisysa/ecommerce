@@ -126,7 +126,7 @@ const CartProduct = ({ product }: IProps) => {
                   <Counter
                     value={item.count || 0}
                     min={1}
-                    max={item.stoke}
+                    max={item.stock}
                     onChange={(count: number) => {
                       dispatch(
                         addToCart({

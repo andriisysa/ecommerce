@@ -40,7 +40,7 @@ export interface IProductItem {
   price: number;
   from: string;
   to: string;
-  stoke: 2;
+  stock: number;
 }
 
 export interface IProduct extends IDoc {
