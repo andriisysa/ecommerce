@@ -51,7 +51,7 @@ const AppBar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [dispatch]);
 
   const onMobileMenuSelect = (path?: Route) => {
     setMobileMenuOpen(false);

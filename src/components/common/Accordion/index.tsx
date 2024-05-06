@@ -3,7 +3,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion as MuiAccordion, NoSsr } from '@mui/material';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
 import cn from 'classnames';
 
 import { IAccordionProps } from './Accordion.types';

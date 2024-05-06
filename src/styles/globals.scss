@@ -2,12 +2,18 @@
 @import './transition';
 @import '@/styles/variables/_breakpoint.scss';
 
+@font-face {
+  font-family: Tahoma;
+  src: local(Tahoma) url('/fonts/tahoma.ttf') format('truetype');
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family:
     -apple-system,
+    Tahoma,
     BlinkMacSystemFont,
     Segoe UI,
     Roboto,

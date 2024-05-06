@@ -71,7 +71,7 @@ const CheckoutPage = ({ couponCode }: IProps) => {
     if (couponCode) {
       verifyCoupon({ couponCode });
     }
-  }, [couponCode]);
+  }, [couponCode, verifyCoupon]);
 
   const isFirstStep = () => step === 1;
 

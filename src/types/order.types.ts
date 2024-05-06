@@ -34,7 +34,6 @@ export interface IOrder extends IDoc {
     couponDiscount: number;
     products: IOrderProduct[];
     paymentGateway: PaymentGateway;
-    customer: ICustomer;
   };
   orderDate: string;
   attendeeName: string;
@@ -44,10 +43,3 @@ export interface IOrder extends IDoc {
   customer: ICustomer;
 }
 
-export interface IOtherPaymentMethod {
-  id: string;
-  name: string;
-  bank?: string;
-  accountNumber: string;
-  sortCode?: string;
-}

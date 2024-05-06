@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 
-import { IOtherPaymentMethod, PaymentGateway } from '@/types/order.types';
+import { PaymentGateway } from '@/types/order.types';
+import { IOtherPaymentMethod, ITenantContact } from '@/types/tenant.types';
 import { useGetOrderQuery } from '@/redux/apis/productsApi';
 import { numberToCurrency } from '@/utils';
 import { PAGE_COURSES } from '@/routes';
@@ -14,10 +15,11 @@ import styles from './styles.module.scss';
 
 interface IProps {
   otherPaymentMethods: IOtherPaymentMethod[];
+  tenantContact?: ITenantContact;
   id: string;
 }
 
-const OrderPage = ({ otherPaymentMethods, id }: IProps) => {
+const OrderPage = ({ otherPaymentMethods, tenantContact, id }: IProps) => {
   const { data: order, isLoading } = useGetOrderQuery({ id });
 
   if (isLoading) {
@@ -88,8 +90,9 @@ const OrderPage = ({ otherPaymentMethods, id }: IProps) => {
             </div>
 
             <span className={styles.reference}>
-              Please use your Order ID as the payment reference, and email us on
-              info@codekids.org.uk to confirm transfer.
+              Please use your <b>Order Number</b> as the payment reference, and
+              email us on {tenantContact?.email || 'info@codekids.org.uk'} to
+              confirm transfer.
             </span>
           </div>
 

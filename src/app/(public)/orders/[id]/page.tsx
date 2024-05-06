@@ -1,5 +1,5 @@
 import OrderPage from '@/components/Order';
-import { IOtherPaymentMethod } from '@/types/order.types';
+import { ITenant } from '@/types/tenant.types';
 import request, { fetchOptions } from '@/utils/fetch';
 
 interface IPage {
@@ -9,12 +9,15 @@ interface IPage {
 }
 
 const Page = async ({ params: { id } }: IPage) => {
-  const otherPaymentMethods = await request<IOtherPaymentMethod[]>(
-    `/api/tenants/other-payment-methods`,
-    fetchOptions()
-  );
+  const tenant = await request<ITenant>(`/api/tenants/info`, fetchOptions());
 
-  return <OrderPage otherPaymentMethods={otherPaymentMethods || []} id={id} />;
+  return (
+    <OrderPage
+      otherPaymentMethods={tenant?.otherPaymentMethods || []}
+      tenantContact={tenant?.contact}
+      id={id}
+    />
+  );
 };
 
 export default Page;
